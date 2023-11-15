@@ -1,5 +1,7 @@
 import { Card, Carousel, Col, Layout, Row, Space, Typography } from "antd"
 import { Container } from 'react-bootstrap'
+import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react'
 
 const { Header, Footer, Content } = Layout;
 
