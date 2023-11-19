@@ -1,6 +1,10 @@
+import { CloseCircleOutlined } from "@ant-design/icons";
+import { Modal } from "antd";
 import axios from "axios";
 
-const storeToken = () => {
+export const BASE_URL = 'http://localhost:8081'
+
+export const storeToken = () => {
     const auth = window.localStorage.getItem('auth');
     if (!auth) {
         return null
@@ -10,7 +14,7 @@ const storeToken = () => {
 }
 
 export const api = axios.create({
-    baseURL: 'http://localhost:8081',
+    baseURL: BASE_URL,
 });
 
 api.interceptors.request.use(
@@ -25,4 +29,12 @@ api.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+
+export const fetcher = (url: string) => api.get(url).then((res) => res.data).catch((err) => {
+    Modal.error({
+        title: 'Error to Register',
+        icon: <CloseCircleOutlined />,
+        content: `${err.toString()}`,
+    });
+});
 

@@ -15,6 +15,7 @@ function storeToken(res: any) {
 
 const getUser = async (navigate: Function) => {
     await api.get('/user').then((res) => {
+        console.log("res ", res)
         localStorage.setItem('user', JSON.stringify(res?.data || ''))
         if(res?.data?.role === 'admin'){
             navigate('/admin/home')

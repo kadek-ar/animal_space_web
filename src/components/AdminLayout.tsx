@@ -1,19 +1,22 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined,UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const { Header, Content, Sider } = Layout
 
 
 export default function AdminLayout() {
     const [collapsed, setCollapsed] = useState(false);
+    const navigate = useNavigate()
     const {
         token: { colorBgContainer },
     } = theme.useToken();
 
     return (
-        <Layout>
+        <Layout
+            style={{ minHeight: '100vh' }}
+        >
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="demo-logo-vertical" />
                 <Menu
@@ -24,12 +27,14 @@ export default function AdminLayout() {
                         {
                             key: '1',
                             icon: <UserOutlined />,
-                            label: 'nav 1',
+                            label: 'Home',
+                            onClick: () => navigate('/admin/home')
                         },
                         {
                             key: '2',
                             icon: <VideoCameraOutlined />,
-                            label: 'nav 2',
+                            label: 'List Category',
+                            onClick: () => navigate('/admin/category')
                         },
                         {
                             key: '3',
