@@ -1,11 +1,13 @@
-import { Card, Col, Divider, Flex, Modal, Row, Space, Spin, Typography } from "antd";
+import { Button, Card, Col, Divider, Flex, Modal, Row, Space, Spin, Typography, message } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { api } from "../utillities/api";
-import { CloseCircleOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 
 export default function DetailAnimal() {
     const [loading, setLoading] = useState(false)
+    const [loadingSubmit, setLoadingSubmit] = useState(false)
+    const [messageApi, contextHolder] = message.useMessage();
     const [data, setData] = useState<any>()
     const { id } = useParams()
 
@@ -27,9 +29,30 @@ export default function DetailAnimal() {
     useEffect(() => {
         getData()
     }, [getData])
+
+    const addToCart = () => {
+        setLoadingSubmit(true)
+        api.post('/animal-space/cart', {
+            AnimalID: data?.Id
+        }).then(() => {
+            messageApi.open({
+                type: 'success',
+                content: '#'+ data?.Id +' Success add to cart '+ data?.Name ,
+            });
+        }).catch((err) => {
+            Modal.error({
+                title: 'Error to Get data',
+                icon: <CloseCircleOutlined />,
+                content: `${err.toString()}`,
+            });
+        }).finally(() => {
+            setLoadingSubmit(false)
+        })
+    }
     
     return (
         <Spin spinning={loading}>
+             {contextHolder}
             <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
                 <Card>
                     <Flex wrap="wrap" gap="small">
@@ -70,6 +93,14 @@ export default function DetailAnimal() {
                             </div>
                         </Space>
                     </Flex>
+                    <Button 
+                        icon={<ShoppingCartOutlined /> } 
+                        type="primary" 
+                        loading={loadingSubmit}
+                        onClick={addToCart}
+                    >
+                        Add To Cart
+                    </Button>
                 </Card>
                     
             </Space>

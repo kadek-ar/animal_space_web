@@ -2,7 +2,7 @@ import { Card, Carousel, Col, Dropdown, Flex, Input, Layout, MenuProps, Row, Spa
 import { Container } from 'react-bootstrap'
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from 'react'
-import { DownOutlined, LogoutOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { DownOutlined, LogoutOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 
 const { Header, Footer, Content } = Layout;
 
@@ -40,7 +40,7 @@ function HomeLayout() {
     return (
         <Layout
             style={{
-                background: '#fff'
+                background: '#fff',
             }}
         >
             <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
@@ -67,20 +67,27 @@ function HomeLayout() {
                                 style={{ width: 304 }}
                                 defaultValue={searchParams.get('search') || ''}
                             />
-                            <Dropdown menu={{ items }}>
-                                <a onClick={(e) => e.preventDefault()}>
-                                    <Space style={{color: '#fff'}}>
-                                        <DownOutlined />
-                                        {getUser().username}
-                                        <UserOutlined />
-                                    </Space>
-                                </a>
-                            </Dropdown>
+                            <Flex gap="middle" wrap="wrap">
+                                <ShoppingCartOutlined style={{color: '#fff'}} onClick={() => navigate('/cart')} />
+                                <Dropdown menu={{ items }}>
+                                    <a onClick={(e) => e.preventDefault()}>
+                                        <Space style={{color: '#fff'}}>
+                                            <DownOutlined />
+                                            {getUser().username}
+                                            <UserOutlined />
+                                        </Space>
+                                    </a>
+                                </Dropdown>
+                            </Flex>
                         </Flex>
                     </Container>
                 </Header>
                 <Container>
-                    <Content>
+                    <Content
+                        style={{
+                            minHeight: '100vh'
+                        }}
+                    >
                         <Outlet />
                     </Content>
                 </Container>

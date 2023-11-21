@@ -14,6 +14,7 @@ import ShelterLayout from './components/ShelterLayout'
 import CreateCatogories from './pages/admin/CreateCatogories'
 import SearchPage from './pages/SearchPage'
 import DetailAnimal from './pages/DetailAnimal'
+import Cart from './pages/Cart'
 
 function App() {
   const navigate = useNavigate()
@@ -33,6 +34,7 @@ function App() {
         <Route path="/create-shelter" element={<CreateShelter />}/>
         <Route path="search-animal" element={<SearchPage />}/>
         <Route path="detail-animal/:id" element={<DetailAnimal />}/>
+        <Route path="cart" element={<Cart />}/>
         {/* <Route path="tasks" element={<DashboardTasks />} /> */}
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
