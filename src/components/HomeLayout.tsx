@@ -1,8 +1,8 @@
-import { Card, Carousel, Col, Dropdown, Flex, Input, Layout, MenuProps, Row, Space, Typography } from "antd"
+import { Avatar, Card, Carousel, Col, Dropdown, Flex, Input, Layout, MenuProps, Row, Space, Typography } from "antd"
 import { Container } from 'react-bootstrap'
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from 'react'
-import { DownOutlined, LogoutOutlined, SearchOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
+import { DownOutlined, LogoutOutlined, SearchOutlined, ShoppingCartOutlined, ShoppingOutlined, UserOutlined } from "@ant-design/icons";
 
 const { Header, Footer, Content } = Layout;
 
@@ -67,14 +67,14 @@ function HomeLayout() {
                                 style={{ width: 304 }}
                                 defaultValue={searchParams.get('search') || ''}
                             />
-                            <Flex gap="middle" wrap="wrap">
+                            <Flex gap="large" wrap="wrap">
                                 <ShoppingCartOutlined style={{color: '#fff'}} onClick={() => navigate('/cart')} />
+                                <ShoppingOutlined style={{color: '#fff'}} onClick={() => navigate('/transaction')} />
                                 <Dropdown menu={{ items }}>
                                     <a onClick={(e) => e.preventDefault()}>
                                         <Space style={{color: '#fff'}}>
-                                            <DownOutlined />
                                             {getUser().username}
-                                            <UserOutlined />
+                                            <Avatar size="small" icon={<UserOutlined />} />
                                         </Space>
                                     </a>
                                 </Dropdown>

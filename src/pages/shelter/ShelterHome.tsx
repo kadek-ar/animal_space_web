@@ -57,8 +57,8 @@ export default function ShelterHome() {
         },
         {
             title: 'Animal Category',
-            dataIndex: 'CategoriesID',
-            key: 'CategoriesID',
+            dataIndex: 'CategoryID',
+            key: 'CategoryID',
             render: (val: number) => {
                 if(!val) return null
                 return (
@@ -114,11 +114,12 @@ export default function ShelterHome() {
                 image: respon.Image,
                 name: respon.Name,
                 gender: respon.Gender,
-                CategoriesID: respon.CategoriesID,
+                CategoryID: respon.CategoryID,
                 type: respon.Type,
                 age: respon.Age,
                 description: respon.Description,
-                quantity: respon.Quantity
+                quantity: respon.Quantity,
+                price: respon.Price
             })
         }).catch((err) => {
             Modal.error({
@@ -249,7 +250,7 @@ export default function ShelterHome() {
                         >
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Animal Category" name={['CategoriesID']} 
+                        <Form.Item label="Animal Category" name={['CategoryID']} 
                             rules={[
                                 {
                                     required: true,

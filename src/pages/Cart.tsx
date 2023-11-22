@@ -1,6 +1,5 @@
-import { CheckOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined, ShoppingOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Divider, Flex, Modal, Row, Space, Spin, Table, Typography } from "antd";
-import { ColumnsType } from "antd/es/table";
+import { CheckOutlined, CloseCircleOutlined, ShoppingOutlined } from "@ant-design/icons";
+import { Button, Card, Divider, Flex, Modal, Space, Spin, Typography } from "antd";
 import useSWR from "swr";
 import { api, fetcher } from "../utillities/api";
 import { useState } from "react";
@@ -15,7 +14,7 @@ export default function Cart() {
         (data?.data || []).forEach((item: any) => {
             total = total + (item?.Quantity * item?.Animal?.Price)
         });
-        return total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")
+        return total
     }
 
     const checkout = () => {
@@ -25,7 +24,7 @@ export default function Cart() {
             Quantity: item?.Quantity,
             Price: item?.Animal?.Price
         }))
-        api.post('/animal-space/checkout', payload).then(() => {
+        api.post('/animal-space/checkout?total_price='+totalPrice()+'&number_of_item='+(data?.data || []).length, payload).then(() => {
             Modal.success({
                 title: 'Success',
                 icon: <CheckOutlined />,
@@ -81,7 +80,7 @@ export default function Cart() {
                             Total
                         </Typography.Text>
                         <Typography.Text >
-                            Rp {totalPrice()}   
+                            Rp {totalPrice().toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}   
                         </Typography.Text>
                     </Space>
                 </Flex>

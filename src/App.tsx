@@ -15,6 +15,8 @@ import CreateCatogories from './pages/admin/CreateCatogories'
 import SearchPage from './pages/SearchPage'
 import DetailAnimal from './pages/DetailAnimal'
 import Cart from './pages/Cart'
+import Transaction from './pages/Transaction'
+import TransactionDetail from './pages/TransactionDetail'
 
 function App() {
   const navigate = useNavigate()
@@ -35,6 +37,8 @@ function App() {
         <Route path="search-animal" element={<SearchPage />}/>
         <Route path="detail-animal/:id" element={<DetailAnimal />}/>
         <Route path="cart" element={<Cart />}/>
+        <Route path="transaction" element={<Transaction />}/>
+        <Route path="transaction/:id" element={<TransactionDetail />}/>
         {/* <Route path="tasks" element={<DashboardTasks />} /> */}
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
