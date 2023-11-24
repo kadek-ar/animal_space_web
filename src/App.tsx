@@ -17,6 +17,9 @@ import DetailAnimal from './pages/DetailAnimal'
 import Cart from './pages/Cart'
 import Transaction from './pages/Transaction'
 import TransactionDetail from './pages/TransactionDetail'
+import SuccessPage from './pages/SuccessPage'
+import ShelterTransaction from './pages/shelter/ShelterTransaction'
+import ShelterTransactionDetail from './pages/shelter/ShelterTransactionDetail'
 
 function App() {
   const navigate = useNavigate()
@@ -39,6 +42,7 @@ function App() {
         <Route path="cart" element={<Cart />}/>
         <Route path="transaction" element={<Transaction />}/>
         <Route path="transaction/:id" element={<TransactionDetail />}/>
+        <Route path="transaction/success" element={<SuccessPage />}/>
         {/* <Route path="tasks" element={<DashboardTasks />} /> */}
       </Route>
       <Route path="/admin" element={<AdminLayout />}>
@@ -47,6 +51,8 @@ function App() {
       </Route>
       <Route path="/shelter" element={<ShelterLayout />}>
         <Route path="home" element={<ShelterHome />} />
+        <Route path="transaction" element={<ShelterTransaction />} />
+        <Route path="transaction/detail/:id" element={<ShelterTransactionDetail />} />
       </Route>
       <Route path='/login' element={<Login />}></Route>
       <Route path='/register' element={<Register />}></Route>

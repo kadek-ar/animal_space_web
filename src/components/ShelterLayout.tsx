@@ -1,13 +1,14 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import { HomeOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ShoppingOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import { Breadcrumb, Button, Layout, Menu, Typography, theme } from "antd";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const { Header, Content, Sider } = Layout
 
 
 export default function ShelterLayout() {
     const [collapsed, setCollapsed] = useState(false);
+    const navigate = useNavigate()
     const {
         token: { colorBgContainer },
     } = theme.useToken();
@@ -42,18 +43,15 @@ export default function ShelterLayout() {
                         items={[
                             {
                                 key: '1',
-                                icon: <UserOutlined />,
+                                icon: <HomeOutlined />,
                                 label: 'Home',
+                                onClick: () => navigate('/shelter/home')
                             },
                             {
                                 key: '2',
-                                icon: <VideoCameraOutlined />,
-                                label: 'nav 2',
-                            },
-                            {
-                                key: '3',
-                                icon: <UploadOutlined />,
-                                label: 'nav 3',
+                                icon: <ShoppingOutlined />,
+                                label: 'Transaction',
+                                onClick: () => navigate('/shelter/transaction')
                             },
                         ]}
                     />

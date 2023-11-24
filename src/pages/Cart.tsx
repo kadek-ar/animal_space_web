@@ -3,9 +3,11 @@ import { Button, Card, Divider, Flex, Modal, Space, Spin, Typography } from "ant
 import useSWR from "swr";
 import { api, fetcher } from "../utillities/api";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate()
 
     const { data, isLoading, mutate } = useSWR(`/animal-space/cart`, fetcher);
 
@@ -29,6 +31,8 @@ export default function Cart() {
                 title: 'Success',
                 icon: <CheckOutlined />,
                 content: `Success to checkout animal`,
+                onOk: () => navigate('/transaction/success'),
+                onCancel: () => navigate('/transaction/success')
             });
             mutate()
         }).catch((err) => {

@@ -55,7 +55,7 @@ export default function DetailAnimal() {
              {contextHolder}
             <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
                 <Card>
-                    <Flex wrap="wrap" gap="small">
+                    <Flex wrap="wrap" gap="middle">
                         <div style={{ width: '435px' }}>
                             <img style={{ width: '100%' }} src={data?.Image || ''} alt="detail_animal_pic" />
                         </div>
@@ -64,7 +64,7 @@ export default function DetailAnimal() {
                             <Typography.Title level={4} style={{ color: '#EB9A10' }}>Rp {data?.Price}</Typography.Title>
                             <Divider />
                             <Row>
-                                <Col span={20}>
+                                <Col span={10}>
                                     <Typography.Text>Kategori :</Typography.Text>
                                 </Col>
                                 <Col>
@@ -72,7 +72,7 @@ export default function DetailAnimal() {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col span={20}>
+                                <Col span={10}>
                                     <Typography.Text>Jenis    :</Typography.Text>
                                 </Col>
                                 <Col>
@@ -80,7 +80,7 @@ export default function DetailAnimal() {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col span={20}>
+                                <Col span={10}>
                                     <Typography.Text>Jumlah   :</Typography.Text>
                                 </Col>
                                 <Col>

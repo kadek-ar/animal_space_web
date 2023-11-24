@@ -5,16 +5,22 @@ import { InboxOutlined } from "@ant-design/icons";
 
 const { Dragger } = Upload;
 
-export default function UploadImage({
+export default function UploadReceiptImage({
     formName,
     form,
     formLabel,
-    formLabelHide
+    formLabelHide,
+    setList,
+    list,
+    index
 }: {
     formName?: string;
     form: FormInstance;
     formLabel?: string;
     formLabelHide?: boolean;
+    setList: Function;
+    list: any[];
+    index: number
 }) {
     const [loading, setLoading] = useState(false)
     const [img, setImg] = useState<any>()
@@ -38,10 +44,14 @@ export default function UploadImage({
                 formData.append("image", info.file.originFileObj)
                 setLoading(true)
                 await api.post('/upload', formData).then((res) => {
+                    let tmpList = [...list]
+                    tmpList[index].Images = res.data.file_url
+                    setList(tmpList)
+                    setImg({
+                        url: res.data.file_url,
+                        name: info.file.name
+                    })
                     message.success(`${info.file.name} file uploaded successfully.`);
-                    form.setFieldValue([ formName ? formName : 'image'], res.data.file_url)
-                    console.log("res ", res)
-                    setImg(info.file.name)
                 }).catch(() => {
                     message.error(`${info.file.name} file upload failed.`);
                 }).finally(() => {
@@ -50,26 +60,6 @@ export default function UploadImage({
             }
         },
     };
-
-    // const handleImage = (e: any) => {
-
-    //     if(!e.target.files){
-    //         return
-    //     }
-    //     const formData = new FormData()
-    //     formData.append("image", e.target.files[0])
-
-    //     api.post('/upload',formData).then((res) => {
-    //         console.log("res ", res)
-    //         form.setFieldValue(['image'], res.data.file_url)
-    //     }).catch((err) => {
-    //         Modal.error({
-    //             title: 'Error to Register',
-    //             icon: <CloseCircleOutlined />,
-    //             content: `${err.toString()}`,
-    //         });
-    //     })
-    // }
 
     const propsLabel = formLabelHide ? {} : { label: formLabel ? formLabel : "Upload" }
 
@@ -90,26 +80,20 @@ export default function UploadImage({
                     {...props}
                 >
                     <p className="ant-upload-drag-icon">
-                        {
+                        { 
                             loading ? <Spin size="large" /> : 
-                                form.getFieldValue(['image']) ? <img style={{ width: '100px' }} src={form.getFieldValue(['image'])} alt="preview_pic" /> :
+                            list && list[index]?.Images ? 
+                                <img style={{ width: '500px' }} src={list[index]?.Images } alt="preview_pic" /> :
                             <InboxOutlined />
                         }
                     </p>
-                    <p className="ant-upload-text"> {img ? img : 'Click or drag file to this area to upload'}</p>
+                    <p className="ant-upload-text"> {img?.name ? img?.name : 'Click or drag file to this area to upload'}</p>
                     <p className="ant-upload-hint">
                         Support for a single or bulk upload. Strictly prohibited from uploading company data or other
                         banned files.
                     </p>
                 </Dragger>
-                {/* <Input type="file" onChange={(e) => handleImage(e)} /> */}
                 
-            </Form.Item>
-            <Form.Item
-                hidden
-                name={['image']}
-            >
-                <Input />
             </Form.Item>
         </>
     )

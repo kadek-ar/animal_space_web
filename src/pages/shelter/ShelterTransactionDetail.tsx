@@ -1,41 +1,42 @@
-import { Alert, Button, Card, Col, Divider, Flex, Form, Row, Space, Spin, Tag, Typography } from "antd"
+import { Alert, Card, Col, Divider, Flex, Row, Space, Spin, Tag, Typography } from "antd"
 import { useParams } from "react-router-dom"
 import useSWR from "swr";
-import { fetcher } from "../utillities/api";
 import { PhoneOutlined, ShopOutlined } from "@ant-design/icons";
-import UploadReceiptImage from "../components/UploadReceiptImage";
-import { useEffect, useState } from "react";
+import { fetcher } from "../../utillities/api";
 
-export default function TransactionDetail() {
+export default function ShelterTransactionDetail() {
     const { id } = useParams()
-    const [form] = Form.useForm();
-    const [list, setList] = useState<any>()
 
-    const { data, isLoading } = useSWR(`/animal-space/transaction/` + id, fetcher);
-
-    useEffect(() => {
-        setList(data?.data)
-    }, [setList, data?.data])
-
-    const sendImage = (idx: number) => {
-        console.log("list ", list[idx])
+    const getUser = () => {
+        const auth = window.localStorage.getItem('user');
+        if (!auth) {
+            return null
+        }
+        const tmp = JSON.parse(auth)
+        return tmp
     }
-    
+
+    const { data, isLoading } = useSWR(`/shelter/transaction/detail/${getUser()?.shelter_id}/` + id, fetcher);
+
     return (
         <Spin spinning={isLoading}>
             <Typography.Title level={2}>Transaction ID: {id}</Typography.Title>
             <Divider />
             <Alert
                 style={{ color: '#91caff' }}
-                message="Informational Notes"
-                description="Hubungi shelter yang ada di setiap item / list hewan untuk melanjutkan transaksi dengan pihak shelter"
+                message="User Information"
+                description={(
+                    <Space direction="vertical" size="small" style={{ display: 'flex' }}>
+                        <Typography.Text>Name: <strong>{data?.user?.Username}</strong></Typography.Text>
+                        <Typography.Text>Email: <strong>{data?.user?.Email}</strong></Typography.Text>
+                    </Space>    
+                )}
                 type="info"
-                showIcon
             />
             <br />
             <Typography.Title level={4}>List of product</Typography.Title>
             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                {(list || []).map((item: any, idx: number) => (
+                {(data?.data || []).map((item: any) => (
                     <Card>
                         <Flex gap="small" wrap="wrap" justify="space-between" align="center">
                             <Typography.Title level={3}>{item.AnimalName}</Typography.Title>
@@ -74,17 +75,6 @@ export default function TransactionDetail() {
                                 </Flex>
                             </Space>
                         </Flex>
-                        <Divider />
-                        <Space direction="vertical" style={{ width: '100%' }}>
-                            <UploadReceiptImage form={form} setList={setList} list={list} index={idx} />
-                            <div
-                                style={{ textAlign: 'center' }}
-                            >
-                                <Button type="primary" htmlType="submit" onClick={() => sendImage(idx)}>
-                                    Send Receipt
-                                </Button>
-                            </div>
-                        </Space>
                     </Card>
                 ))}
             </Space>
