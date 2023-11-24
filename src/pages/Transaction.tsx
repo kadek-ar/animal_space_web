@@ -18,22 +18,26 @@ export default function Transaction() {
                     { (data?.data || []).map((item: any) => (
                         <Card>
                             <Flex align="baseline" justify="space-between">
-                                <Typography.Title level={5}>Transaction ID: {item.ID}</Typography.Title>
+                                <Typography.Title level={5}>Transaction ID: {item.transaction_id}</Typography.Title>
                                 <div>
-                                    <Tag color="processing">{item.Status}</Tag>
-                                    <Button onClick={() => navigate('/transaction/'+item.ID)}>Detail Transaction</Button>
+                                    { item.animal_count === item.approve_count ?
+                                        <Tag color="success">Done</Tag>
+                                        :
+                                        <Tag color="processing">Active</Tag>
+                                    }
+                                    <Button onClick={() => navigate('/transaction/'+item.transaction_id)}>Detail Transaction</Button>
                                 </div>
                             </Flex>
                             <Divider />
                             <Row justify="space-between">
                                 <Col >
                                     <Typography.Text>Transaction Date:</Typography.Text>
-                                    <Typography.Title level={5}>{moment(item.CreatedAt).format("YYYY MMMM DD")}</Typography.Title>
-                                    <Typography.Text>{item.NumberOfItem} Animal</Typography.Text>
+                                    <Typography.Title level={5}>{moment(item.created_at).format("YYYY MMMM DD")}</Typography.Title>
+                                    <Typography.Text>{item.animal_count} Animal</Typography.Text>
                                 </Col>
                                 <Col >
                                     <Typography.Text>Total Price: </Typography.Text>
-                                    <Typography.Title level={5}>Rp {item.Total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</Typography.Title>
+                                    <Typography.Title level={5}>Rp {item.total_price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</Typography.Title>
                                 </Col>
                             </Row>
                         </Card>

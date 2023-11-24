@@ -9,18 +9,18 @@ export default function UploadReceiptImage({
     formName,
     form,
     formLabel,
-    formLabelHide,
     setList,
     list,
-    index
+    index,
+    uploadDisable
 }: {
     formName?: string;
     form: FormInstance;
     formLabel?: string;
-    formLabelHide?: boolean;
     setList: Function;
     list: any[];
-    index: number
+    index: number;
+    uploadDisable?: boolean;
 }) {
     const [loading, setLoading] = useState(false)
     const [img, setImg] = useState<any>()
@@ -36,6 +36,7 @@ export default function UploadReceiptImage({
         name: 'file',
         multiple: true,
         showUploadList: false,
+        disabled: uploadDisable,
         onChange: async (info: any) => {
             if (info.file.status !== 'uploading') {
                 // const { status } = info.file;
@@ -61,12 +62,9 @@ export default function UploadReceiptImage({
         },
     };
 
-    const propsLabel = formLabelHide ? {} : { label: formLabel ? formLabel : "Upload" }
-
     return (
         <>
             <Form.Item
-                {...propsLabel}
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 rules={[

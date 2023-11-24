@@ -30,7 +30,11 @@ export default function ShelterTransaction() {
                             <Flex align="baseline" justify="space-between">
                                 <Typography.Title level={5}>Transaction ID: {item.transaction_id}</Typography.Title>
                                 <div>
-                                    <Tag color="processing">{item.status}</Tag>
+                                    { item.animal_count === item.approve_count ?
+                                        <Tag color="success">Done</Tag>
+                                        :
+                                        <Tag color="processing">Active</Tag>
+                                    }
                                     <Button onClick={() => navigate('/shelter/transaction/detail/'+item.transaction_id)}>Detail Transaction</Button>
                                 </div>
                             </Flex>

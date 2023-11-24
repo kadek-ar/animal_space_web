@@ -1,8 +1,8 @@
-import { Alert, Button, Card, Col, Divider, Flex, Form, Row, Space, Spin, Tag, Typography } from "antd"
+import { Alert, Button, Card, Col, Divider, Flex, Form, Modal, Row, Space, Spin, Tag, Typography } from "antd"
 import { useParams } from "react-router-dom"
 import useSWR from "swr";
-import { fetcher } from "../utillities/api";
-import { PhoneOutlined, ShopOutlined } from "@ant-design/icons";
+import { api, fetcher } from "../utillities/api";
+import { CheckOutlined, CloseCircleOutlined, PhoneOutlined, ShopOutlined } from "@ant-design/icons";
 import UploadReceiptImage from "../components/UploadReceiptImage";
 import { useEffect, useState } from "react";
 
@@ -10,15 +10,46 @@ export default function TransactionDetail() {
     const { id } = useParams()
     const [form] = Form.useForm();
     const [list, setList] = useState<any>()
+    const [loading, setLoading] = useState<any>()
 
-    const { data, isLoading } = useSWR(`/animal-space/transaction/` + id, fetcher);
+    const { data, isLoading, mutate } = useSWR(`/animal-space/transaction/` + id, fetcher);
 
     useEffect(() => {
         setList(data?.data)
     }, [setList, data?.data])
 
     const sendImage = (idx: number) => {
-        console.log("list ", list[idx])
+        const payload = list[idx]
+        setLoading(true)
+        api.post('/animal-space/transaction/receipt', payload).then(() => {
+            Modal.success({
+                title: 'Success',
+                icon: <CheckOutlined />,
+                content: `Success send receipt for ${payload.AnimalName}`,
+            });
+            mutate()
+        }).catch((err) => {
+            Modal.confirm({
+                title: 'Error to Register',
+                icon: <CloseCircleOutlined />,
+                content: `${err.toString()}`,
+            });
+        }).finally(() => {
+            setLoading(false)
+        })
+    }
+
+    const StatusTag = ({status}: {status: string}) => {
+        if(status === "approve"){
+            return <Tag color="success">Approve</Tag>
+        }
+        else if(status === "reject"){
+            return <Tag color="error">Reject</Tag>
+        }
+        else if(status === "pending"){
+            return <Tag color="processing">Waiting approval</Tag>
+        }
+        return ""
     }
     
     return (
@@ -76,13 +107,23 @@ export default function TransactionDetail() {
                         </Flex>
                         <Divider />
                         <Space direction="vertical" style={{ width: '100%' }}>
-                            <UploadReceiptImage form={form} setList={setList} list={list} index={idx} />
+                            <UploadReceiptImage form={form} setList={setList} list={list} index={idx} uploadDisable={item.Status === "pending" || item.Status === "approve"} />
                             <div
                                 style={{ textAlign: 'center' }}
                             >
-                                <Button type="primary" htmlType="submit" onClick={() => sendImage(idx)}>
-                                    Send Receipt
-                                </Button>
+                                <Space direction="vertical">
+                                    <div>
+                                        { item?.Status &&
+                                            <Typography.Title level={5}>Status: </Typography.Title>
+                                        }
+                                        <StatusTag status={item.Status} />
+                                    </div>
+                                    { (!item?.Status || item?.Status === "reject") &&
+                                        <Button loading={loading} type="primary" htmlType="submit" onClick={() => sendImage(idx)} disabled={!item?.Images}>
+                                            Send Receipt
+                                        </Button>
+                                    }
+                                </Space>
                             </div>
                         </Space>
                     </Card>

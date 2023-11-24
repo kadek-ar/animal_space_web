@@ -1,11 +1,14 @@
-import { Alert, Card, Col, Divider, Flex, Row, Space, Spin, Tag, Typography } from "antd"
+import { Alert, Button, Card, Col, Divider, Flex, Modal, Row, Space, Spin, Tag, Typography } from "antd"
 import { useParams } from "react-router-dom"
 import useSWR from "swr";
-import { PhoneOutlined, ShopOutlined } from "@ant-design/icons";
-import { fetcher } from "../../utillities/api";
+import { CheckOutlined, CloseCircleOutlined, PhoneOutlined, ShopOutlined } from "@ant-design/icons";
+import { api, fetcher } from "../../utillities/api";
+import { useEffect, useState } from "react";
 
 export default function ShelterTransactionDetail() {
     const { id } = useParams()
+    const [list, setList] = useState<any>()
+    const [loading, setLoading] = useState(false)
 
     const getUser = () => {
         const auth = window.localStorage.getItem('user');
@@ -16,7 +19,46 @@ export default function ShelterTransactionDetail() {
         return tmp
     }
 
-    const { data, isLoading } = useSWR(`/shelter/transaction/detail/${getUser()?.shelter_id}/` + id, fetcher);
+    const { data, isLoading, mutate } = useSWR(`/shelter/transaction/detail/${getUser()?.shelter_id}/` + id, fetcher);
+
+    useEffect(() => {
+        setList(data?.data)
+    }, [setList, data?.data])
+
+    const approvalImg = (idx: number, approval: string) => {
+        list[idx].Status = approval
+        const payload = list[idx]
+        setLoading(true)
+        api.put('/shelter/transaction/detail/approval', payload).then(() => {
+            Modal.success({
+                title: 'Success',
+                icon: <CheckOutlined />,
+                content: `Success approve for ${payload.AnimalName}`,
+            });
+            mutate()
+        }).catch((err) => {
+            Modal.confirm({
+                title: 'Error to Register',
+                icon: <CloseCircleOutlined />,
+                content: `${err.toString()}`,
+            });
+        }).finally(() => {
+            setLoading(false)
+        })
+    }
+
+    const StatusTag = ({status}: {status: string}) => {
+        if(status === "approve"){
+            return <Tag color="success">Approve</Tag>
+        }
+        else if(status === "reject"){
+            return <Tag color="error">Reject</Tag>
+        }
+        else if(status === "pending"){
+            return <Tag color="processing">Waiting approval</Tag>
+        }
+        return ""
+    }
 
     return (
         <Spin spinning={isLoading}>
@@ -29,14 +71,14 @@ export default function ShelterTransactionDetail() {
                     <Space direction="vertical" size="small" style={{ display: 'flex' }}>
                         <Typography.Text>Name: <strong>{data?.user?.Username}</strong></Typography.Text>
                         <Typography.Text>Email: <strong>{data?.user?.Email}</strong></Typography.Text>
-                    </Space>    
+                    </Space>
                 )}
                 type="info"
             />
             <br />
             <Typography.Title level={4}>List of product</Typography.Title>
             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                {(data?.data || []).map((item: any) => (
+                {(data?.data || []).map((item: any, idx: number) => (
                     <Card>
                         <Flex gap="small" wrap="wrap" justify="space-between" align="center">
                             <Typography.Title level={3}>{item.AnimalName}</Typography.Title>
@@ -75,6 +117,38 @@ export default function ShelterTransactionDetail() {
                                 </Flex>
                             </Space>
                         </Flex>
+                        { item.Status &&
+                            <>
+                                <Divider />
+                                <Space direction="vertical" style={{ width: '100%' }}>
+                                    <Typography.Title level={4}>Receipt send by customer</Typography.Title>
+                                    <div style={{ maxWidth: '500px', margin: 'auto' }}>
+                                        <img style={{ width: '100%' }} src={item.Images} alt="" />
+                                    </div>
+                                    <div
+                                        style={{ textAlign: 'center' }}
+                                    >
+                                        <Space direction="vertical" >
+                                            <div>
+                                                <Typography.Title level={5}>Status: </Typography.Title>
+                                                <StatusTag status={item.Status} />
+                                            </div>
+                                            {item.Status === "pending" &&
+                                                <Space direction="horizontal">
+                                                    <Button type="primary" loading={loading} onClick={() => approvalImg(idx, "approve")}>
+                                                        Approve
+                                                    </Button>
+                                                    <Button type="primary" danger loading={loading} onClick={() => approvalImg(idx, "reject")}>
+                                                        Reject
+                                                    </Button>
+                                                </Space>
+
+                                            }
+                                        </Space>
+                                    </div>
+                                </Space>
+                            </>
+                        }
                     </Card>
                 ))}
             </Space>
