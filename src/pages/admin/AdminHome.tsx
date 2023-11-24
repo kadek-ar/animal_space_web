@@ -1,13 +1,13 @@
 import { Button, Card, Flex, Modal, Table } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { api } from "../../utillities/api";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
 export default function AdminHome() {
     const [data, setData] = useState<any>()
 
-    useEffect(() => {
+    const getShelter = useCallback(() => {
         api.get('/shelter').then((res) => {
             setData(res?.data?.data || [])
         }).catch((err) => {
@@ -19,6 +19,10 @@ export default function AdminHome() {
         })
     }, [setData])
 
+    useEffect(() => {
+        getShelter()
+    }, [getShelter])
+
 
     const approve = (id: number) => {
         const payload = {id: id, status: 'approve', note: ''}
@@ -28,6 +32,7 @@ export default function AdminHome() {
                 icon: <CloseCircleOutlined />,
                 content: `${res?.data?.messege}`,
             });
+            getShelter()
         }).catch((err) => {
             Modal.confirm({
                 title: 'Error approval',

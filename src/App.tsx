@@ -20,6 +20,7 @@ import TransactionDetail from './pages/TransactionDetail'
 import SuccessPage from './pages/SuccessPage'
 import ShelterTransaction from './pages/shelter/ShelterTransaction'
 import ShelterTransactionDetail from './pages/shelter/ShelterTransactionDetail'
+import EditShelter from './pages/shelter/EditShelter'
 
 function App() {
   const navigate = useNavigate()
@@ -37,6 +38,7 @@ function App() {
       <Route path="/" element={<HomeLayout />}>
         <Route path="" element={<Home />}/>
         <Route path="/create-shelter" element={<CreateShelter />}/>
+        <Route path="edit-shelter" element={<EditShelter />}/>
         <Route path="search-animal" element={<SearchPage />}/>
         <Route path="detail-animal/:id" element={<DetailAnimal />}/>
         <Route path="cart" element={<Cart />}/>

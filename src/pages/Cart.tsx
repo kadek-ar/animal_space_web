@@ -1,5 +1,5 @@
-import { CheckOutlined, CloseCircleOutlined, ShoppingOutlined } from "@ant-design/icons";
-import { Button, Card, Divider, Flex, Modal, Space, Spin, Typography } from "antd";
+import { CheckOutlined, CloseCircleOutlined, DeleteOutlined, InfoCircleOutlined, ShoppingOutlined } from "@ant-design/icons";
+import { Button, Card, Divider, Flex, Modal, Space, Spin, Typography, message } from "antd";
 import useSWR from "swr";
 import { api, fetcher } from "../utillities/api";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function Cart() {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
+    const [messageApi, contextHolder] = message.useMessage();
 
     const { data, isLoading, mutate } = useSWR(`/animal-space/cart`, fetcher);
 
@@ -46,8 +47,27 @@ export default function Cart() {
         })
     }
 
+    const deleteCart = (id: number) => {
+        api.delete('/animal-space/cart/'+ id).then(() => {
+            mutate()
+            messageApi.open({
+                type: 'success',
+                content: '#'+ id +' Success delete this item ' ,
+            });
+        }).catch((err) => {
+            Modal.error({
+                title: 'Error to delete',
+                icon: <CloseCircleOutlined />,
+                content: `${err.toString()}`,
+            });
+        }).finally(() => {
+            setLoading(false)
+        })
+    }
+
     return (
         <Spin spinning={isLoading || loading}>
+            {contextHolder}
             <Typography.Title level={1}>Cart</Typography.Title>
             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
                 {(data?.data || []).map((rec: any) => (
@@ -64,6 +84,9 @@ export default function Cart() {
                                     <div>Quantity : {rec?.Quantity}</div>
                                 </Flex>
                             </Space>
+                            <Flex justify="end" style={{ width: '100%' }}>
+                                <Button danger icon={<DeleteOutlined />} onClick={() => deleteCart(rec?.AnimalID) } >Delete this Item</Button>
+                            </Flex>
                         </Flex>
                     </Card>
                 ))}

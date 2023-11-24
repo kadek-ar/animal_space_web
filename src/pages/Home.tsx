@@ -71,6 +71,12 @@ export default function Home() {
                     Waiting shelter approval from admin
                 </Button>
             )
+        } else if (user?.shelter_status === 'reject') {
+            return (
+                <Button onClick={() => navigate('/edit-shelter')}>
+                    Your shelter has been reject, Edit here
+                </Button>
+            )
         }
         return (
             <Button onClick={() => navigate('/create-shelter')}>
