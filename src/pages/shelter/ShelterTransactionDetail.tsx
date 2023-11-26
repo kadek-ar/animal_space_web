@@ -121,10 +121,10 @@ export default function ShelterTransactionDetail() {
                             <>
                                 <Divider />
                                 <Space direction="vertical" style={{ width: '100%' }}>
-                                    <Typography.Title level={4}>Receipt send by customer</Typography.Title>
+                                    {/* <Typography.Title level={4}>Receipt send by customer</Typography.Title>
                                     <div style={{ maxWidth: '500px', margin: 'auto' }}>
                                         <img style={{ width: '100%' }} src={item.Images} alt="" />
-                                    </div>
+                                    </div> */}
                                     <div
                                         style={{ textAlign: 'center' }}
                                     >
@@ -134,14 +134,16 @@ export default function ShelterTransactionDetail() {
                                                 <StatusTag status={item.Status} />
                                             </div>
                                             {item.Status === "pending" &&
-                                                <Space direction="horizontal">
-                                                    <Button type="primary" loading={loading} onClick={() => approvalImg(idx, "approve")}>
-                                                        Approve
-                                                    </Button>
-                                                    <Button type="primary" danger loading={loading} onClick={() => approvalImg(idx, "reject")}>
-                                                        Reject
-                                                    </Button>
-                                                </Space>
+                                                <Spin spinning={isLoading}>
+                                                    <Space direction="horizontal">
+                                                        <Button type="primary" loading={loading} onClick={() => approvalImg(idx, "approve")}>
+                                                            Approve
+                                                        </Button>
+                                                        <Button type="primary" danger loading={loading} onClick={() => approvalImg(idx, "reject")}>
+                                                            Reject
+                                                        </Button>
+                                                    </Space>
+                                                </Spin>
 
                                             }
                                         </Space>

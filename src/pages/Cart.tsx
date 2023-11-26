@@ -80,9 +80,9 @@ export default function Cart() {
                                 <Typography.Text strong>{rec?.Animal?.Name}</Typography.Text>
                                 <p>{rec?.Animal?.Type}</p>
                                 <Typography.Text strong style={{ color: '#EB9A10' }}>Rp {rec?.Animal?.Price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</Typography.Text>
-                                <Flex justify="end">
+                                {/* <Flex justify="end">
                                     <div>Quantity : {rec?.Quantity}</div>
-                                </Flex>
+                                </Flex> */}
                             </Space>
                             <Flex justify="end" style={{ width: '100%' }}>
                                 <Button danger icon={<DeleteOutlined />} onClick={() => deleteCart(rec?.AnimalID) } >Delete this Item</Button>

@@ -10,6 +10,7 @@ export default function SearchPage() {
     const [loading, setLoading] = useState(false)
     const [category, setCategory] = useState<any>()
     const [age, setAge] = useState<any>()
+    const [month, setMonth] = useState<any>()
     const navigate = useNavigate()
     const searchParams = new URLSearchParams(document.location.search)
 
@@ -33,7 +34,9 @@ export default function SearchPage() {
             '/animal-space?search=' + (searchParams.get('search') || '') +
             '&category=' + (searchParams.get('category') || '') +
             '&from_age=' + (searchParams.get('from_age') || '') +
-            '&to_age=' + (searchParams.get('to_age') || '')
+            '&to_age=' + (searchParams.get('to_age') || '') + 
+            '&from_month=' + (searchParams.get('from_month') || '') +
+            '&to_month=' + (searchParams.get('to_month') || '')
         ).then((res) => {
             setData(res?.data?.data || [])
         }).catch((err) => {
@@ -51,7 +54,9 @@ export default function SearchPage() {
         searchParams.get('search'),
         searchParams.get('category'),
         searchParams.get('from_age'),
-        searchParams.get('to_age')
+        searchParams.get('to_age'),
+        searchParams.get('from_month'),
+        searchParams.get('to_month')
     ])
 
     useEffect(() => {
@@ -62,7 +67,9 @@ export default function SearchPage() {
         searchParams.get('search'),
         searchParams.get('category'),
         searchParams.get('from_age'),
-        searchParams.get('to_age')
+        searchParams.get('to_age'),
+        searchParams.get('from_month'),
+        searchParams.get('to_month')
     ])
 
     const categoryChange = (val: string) => {
@@ -76,6 +83,12 @@ export default function SearchPage() {
         navigate('/search-animal?'+searchParams.toString())
     }
 
+    const filterMonth = () => {
+        searchParams.set('from_month', month.min || '')
+        searchParams.set('to_month', month.max ? ( month.max < month.min ? month.min : month.max) : '')
+        navigate('/search-animal?'+searchParams.toString())
+    }
+
     return (
         <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
             <Typography.Title level={3}>Search list</Typography.Title>
@@ -84,7 +97,9 @@ export default function SearchPage() {
                 initialValues={{
                     category: searchParams.get('category'),
                     min_age: searchParams.get('from_age'),
-                    max_age: searchParams.get('to_age')
+                    max_age: searchParams.get('to_age'),
+                    min_age_month: searchParams.get('from_month'),
+                    max_age_month: searchParams.get('to_month')
                 }}
             >
                 <Flex wrap="wrap" gap="middle" align="center">
@@ -109,14 +124,24 @@ export default function SearchPage() {
                         </Form.Item>
                     </Flex>
                     <Flex wrap="wrap" gap="small" align="center">
-                        <Typography.Text strong>Filter range of Age : </Typography.Text>
+                        <Typography.Text strong>Filter range of Age (year) : </Typography.Text>
                         <Form.Item name={['min_age']} noStyle>
                             <InputNumber placeholder="Min Age" min={0} onChange={(val: any) => setAge({...age, min: val}) } />
                         </Form.Item>
                         <Form.Item name={['max_age']} noStyle>
                             <InputNumber placeholder="Max Age" onChange={(val: any) => setAge({...age, max: val}) } />
                         </Form.Item>
-                        <Button onClick={() => filterAge()}>Search by Age</Button>
+                        <Button onClick={() => filterAge()}>Search by Age (year)</Button>
+                    </Flex>
+                    <Flex wrap="wrap" gap="small" align="center">
+                        <Typography.Text strong>Filter range of Age (month) : </Typography.Text>
+                        <Form.Item name={['min_age_month']} noStyle>
+                            <InputNumber placeholder="Min Age" min={0} onChange={(val: any) => setMonth({...month, min: val}) } />
+                        </Form.Item>
+                        <Form.Item name={['max_age_month']} noStyle>
+                            <InputNumber placeholder="Max Age" onChange={(val: any) => setMonth({...month, max: val}) } />
+                        </Form.Item>
+                        <Button onClick={() => filterMonth()}>Search by Age (month)</Button>
                     </Flex>
                 </Flex>
             </Form>

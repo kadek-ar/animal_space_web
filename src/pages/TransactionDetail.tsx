@@ -107,10 +107,10 @@ export default function TransactionDetail() {
                         </Flex>
                         <Divider />
                         <Space direction="vertical" style={{ width: '100%' }}>
-                            <UploadReceiptImage form={form} setList={setList} list={list} index={idx} uploadDisable={item.Status === "pending" || item.Status === "approve"} />
+                            {/* <UploadReceiptImage form={form} setList={setList} list={list} index={idx} uploadDisable={item.Status === "pending" || item.Status === "approve"} />
                             <div
                                 style={{ textAlign: 'center' }}
-                            >
+                            > */}
                                 <Space direction="vertical">
                                     <div>
                                         { item?.Status &&
@@ -118,13 +118,13 @@ export default function TransactionDetail() {
                                         }
                                         <StatusTag status={item.Status} />
                                     </div>
-                                    { (!item?.Status || item?.Status === "reject") &&
+                                    {/* { (!item?.Status || item?.Status === "reject") &&
                                         <Button loading={loading} type="primary" htmlType="submit" onClick={() => sendImage(idx)} disabled={!item?.Images}>
                                             Send Receipt
                                         </Button>
-                                    }
+                                    } */}
                                 </Space>
-                            </div>
+                            {/* </div> */}
                         </Space>
                     </Card>
                 ))}

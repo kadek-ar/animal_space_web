@@ -92,6 +92,11 @@ export default function ShelterHome() {
             key: 'Price',
         },
         {
+            title: 'Status',
+            dataIndex: 'Status',
+            key: 'Status',
+        },
+        {
             title: 'Action',
             render: (_: any, rec: any) => {
                 return (
@@ -270,16 +275,28 @@ export default function ShelterHome() {
                         >
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Animal Age" name={['age']} 
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Age is required',
-                                },
-                            ]}
-                        >
-                            <InputNumber />
-                        </Form.Item>
+                        <Flex gap="middle">
+                            <Form.Item label="Animal Age (year)" name={['age']} 
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Age is required',
+                                    },
+                                ]}
+                            >
+                                <InputNumber />
+                            </Form.Item>
+                            <Form.Item label="Animal Age (month)" name={['Month']} 
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Age is required',
+                                    },
+                                ]}
+                            >
+                                <InputNumber />
+                            </Form.Item>
+                        </Flex>
                         <Form.Item label="Description" name={['description']} 
                             rules={[
                                 {
@@ -290,7 +307,7 @@ export default function ShelterHome() {
                         >
                             <Input.TextArea />
                         </Form.Item>
-                        <Form.Item label="Number of animal" name={['quantity']} 
+                        {/* <Form.Item label="Number of animal" name={['quantity']} 
                             rules={[
                                 {
                                     required: true,
@@ -299,7 +316,7 @@ export default function ShelterHome() {
                             ]}
                         >
                             <InputNumber />
-                        </Form.Item>
+                        </Form.Item> */}
                         <Form.Item label="Price" name={['price']} 
                             rules={[
                                 {

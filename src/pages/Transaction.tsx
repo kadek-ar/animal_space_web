@@ -8,6 +8,16 @@ export default function Transaction() {
     const navigate = useNavigate()
     
     const { data, isLoading } = useSWR(`/animal-space/transaction`, fetcher);
+
+    const Status = ({item}:{item: any}) => {
+        console.log("item ", item)
+        if(item.animal_count === item.approve_count ){
+            return <Tag color="success">Done</Tag>
+        }else if(item.animal_count === item.reject_count){
+            return <Tag color="error">Rejected</Tag>
+        }
+        return <Tag color="processing">Active</Tag>
+    }
     
     return (
         <Spin spinning={isLoading}>
@@ -20,11 +30,7 @@ export default function Transaction() {
                             <Flex align="baseline" justify="space-between">
                                 <Typography.Title level={5}>Transaction ID: {item.transaction_id}</Typography.Title>
                                 <div>
-                                    { item.animal_count === item.approve_count ?
-                                        <Tag color="success">Done</Tag>
-                                        :
-                                        <Tag color="processing">Active</Tag>
-                                    }
+                                    <Status item={item} />
                                     <Button onClick={() => navigate('/transaction/'+item.transaction_id)}>Detail Transaction</Button>
                                 </div>
                             </Flex>
