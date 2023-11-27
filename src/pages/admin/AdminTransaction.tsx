@@ -4,21 +4,13 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { fetcher } from "../../utillities/api";
 
-export default function ShelterTransaction() {
+export default function AdminTransaction() {
     const navigate = useNavigate()
-
-    const getUser = () => {
-        const auth = window.localStorage.getItem('user');
-        if (!auth) {
-            return null
-        }
-        const tmp = JSON.parse(auth)
-        return tmp
-    }
     
-    const { data, isLoading } = useSWR(`/shelter/transaction/` + getUser()?.shelter_id, fetcher);
+    const { data, isLoading } = useSWR(`/admin/transaction`, fetcher);
 
     const Status = ({item}:{item: any}) => {
+
         if(item.animal_count === item.approve_count ){
             return <Tag color="success">Done</Tag>
         }else if(item.animal_count === item.reject_count){
@@ -39,7 +31,7 @@ export default function ShelterTransaction() {
                                 <Typography.Title level={5}>Transaction ID: {item.transaction_id}</Typography.Title>
                                 <div>
                                     <Status item={item} />
-                                    <Button onClick={() => navigate('/shelter/transaction/detail/'+item.transaction_id)}>Detail Transaction</Button>
+                                    <Button onClick={() => navigate('/admin/transaction/detail/'+ item.shelter_id +'/'+item.transaction_id)}>Detail Transaction</Button>
                                 </div>
                             </Flex>
                             <Divider />
@@ -48,6 +40,9 @@ export default function ShelterTransaction() {
                                     <Typography.Text>Transaction Date:</Typography.Text>
                                     <Typography.Title level={5}>{moment(item.created_at).format("YYYY MMMM DD")}</Typography.Title>
                                     <Typography.Text>{item.animal_count} Animal</Typography.Text>
+                                    <div>
+                                        <Typography.Title style={{ marginTop: '10px' }} level={5}><strong>Shelter :</strong> {item.shelter_id}#{item.shelter_name}</Typography.Title>
+                                    </div>
                                 </Col>
                                 <Col >
                                     <Typography.Text>Total Price: </Typography.Text>

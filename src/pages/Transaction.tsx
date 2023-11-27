@@ -10,7 +10,6 @@ export default function Transaction() {
     const { data, isLoading } = useSWR(`/animal-space/transaction`, fetcher);
 
     const Status = ({item}:{item: any}) => {
-        console.log("item ", item)
         if(item.animal_count === item.approve_count ){
             return <Tag color="success">Done</Tag>
         }else if(item.animal_count === item.reject_count){

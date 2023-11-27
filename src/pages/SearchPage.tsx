@@ -160,7 +160,7 @@ export default function SearchPage() {
                                     title={item?.Name}
                                     description={(
                                         <Space direction="vertical" size="middle">
-                                            <Typography.Title level={5}>Rp {item?.Price}</Typography.Title>
+                                            <Typography.Title level={5}>Rp {item?.Price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</Typography.Title>
                                         </Space>
                                     )}
                                 />

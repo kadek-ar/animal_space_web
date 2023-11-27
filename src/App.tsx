@@ -21,6 +21,9 @@ import SuccessPage from './pages/SuccessPage'
 import ShelterTransaction from './pages/shelter/ShelterTransaction'
 import ShelterTransactionDetail from './pages/shelter/ShelterTransactionDetail'
 import EditShelter from './pages/shelter/EditShelter'
+import AdminTransaction from './pages/admin/AdminTransaction'
+import AdminTransactionDetail from './pages/admin/AdminTransactionDetail'
+import AdminAnimal from './pages/admin/AdminAnimal'
 
 function App() {
   const navigate = useNavigate()
@@ -50,6 +53,9 @@ function App() {
       <Route path="/admin" element={<AdminLayout />}>
         <Route path="home" element={<AdminHome />} />
         <Route path="category" element={<CreateCatogories />} />
+        <Route path="transaction" element={<AdminTransaction />} />
+        <Route path="transaction/detail/:shelter_id/:id" element={<AdminTransactionDetail />} />
+        <Route path="animal" element={<AdminAnimal />} />
       </Route>
       <Route path="/shelter" element={<ShelterLayout />}>
         <Route path="home" element={<ShelterHome />} />

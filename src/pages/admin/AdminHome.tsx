@@ -50,6 +50,7 @@ export default function AdminHome() {
                 icon: <CloseCircleOutlined />,
                 content: `${res?.data?.messege}`,
             });
+            getShelter()
         }).catch((err) => {
             Modal.confirm({
                 title: 'Error approval',

@@ -6,22 +6,14 @@ import { api, fetcher } from "../../utillities/api";
 import useSWR from "swr";
 import UploadImage from "../../components/UploadImage";
 
-export default function ShelterHome() {
+export default function AdminAnimal() {
     const [form] = Form.useForm();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [loadingEdit, setLoadingEdit] = useState(false);
-    const [isEdit, setIsEdit] = useState(null);
-    const getShelterId = () => {
-        const auth = window.localStorage.getItem('user');
-        if (!auth) {
-            return null
-        }
-        const tmp = JSON.parse(auth)
-        return tmp.shelter_id
-    }
+    const [isEdit, setIsEdit] = useState<any>(null);
 
-    const { data, mutate, isLoading } = useSWR(`/animal?shelter_id=${getShelterId()}`, fetcher);
+    const { data, mutate, isLoading } = useSWR(`/admin/animal`, fetcher);
     
     const { data: data_category } = useSWR('/shelter/category', fetcher);
 
@@ -40,7 +32,9 @@ export default function ShelterHome() {
         {
             title: 'Animal Name',
             dataIndex: 'Image',
+            fixed: 'left',
             key: 'image',
+            width: 200,
             render: (val: string) => {
                 if(!val) return null
                 return (
@@ -54,6 +48,18 @@ export default function ShelterHome() {
             title: 'Animal Name',
             dataIndex: 'Name',
             key: 'name',
+            fixed: 'left'
+        },
+        {
+            title: 'Shelter Name',
+            dataIndex: 'Name',
+            key: 'name',
+            render: (val: any, rec: any) => {
+                if(!val) return null
+                return (
+                    <div>{rec.Shelter.Name}</div>
+                )
+            }
         },
         {
             title: 'Animal Category',
@@ -72,14 +78,14 @@ export default function ShelterHome() {
             key: 'Type',
         },
         {
-            title: 'Animal Age',
+            title: 'Animal Year',
             dataIndex: 'Age',
             key: 'Age',
         },
         {
-            title: 'Number of Animal',
-            dataIndex: 'Quantity',
-            key: 'name',
+            title: 'Animal Month',
+            dataIndex: 'Month',
+            key: 'Age',
         },
         {
             title: 'Description',
@@ -98,10 +104,11 @@ export default function ShelterHome() {
         },
         {
             title: 'Action',
+            fixed: 'right',
             render: (_: any, rec: any) => {
                 return (
                     <Flex gap="small" wrap="wrap">
-                        <Button type="primary" ghost icon={<EditOutlined />} onClick={() => editAnimal(rec.ID)}></Button>
+                        <Button type="primary" ghost icon={<EditOutlined />} onClick={() => editAnimal(rec)}></Button>
                         <Button type="primary" ghost danger icon={<DeleteOutlined /> } onClick={() => deleteAnimal(rec.ID)}></Button>
                     </Flex>
                 )
@@ -109,11 +116,11 @@ export default function ShelterHome() {
         },
     ];
 
-    const editAnimal = async (id: any) => {
+    const editAnimal = async (rec: any) => {
         setIsModalOpen(true)
-        setIsEdit(id)
+        setIsEdit(rec)
         setLoadingEdit(true)
-        await api.get('/animal/'+id).then((res) => {  
+        await api.get('/animal/'+rec.ID).then((res) => {  
             const respon =  res.data.data
             form.setFieldsValue({
                 image: respon.Image,
@@ -145,11 +152,11 @@ export default function ShelterHome() {
     const onFinish = (val: any) => {
         const payload = {
             ...val,
-            ShelterID: getShelterId()
+            ShelterID: isEdit.ShelterID
         }
         setLoading(true)
         if(isEdit){
-            api.put('/animal/'+ isEdit, payload).then(() => {
+            api.put('/animal/'+ isEdit.ID, payload).then(() => {
                 mutate()
                 Modal.success({
                     title: 'Success',
@@ -334,18 +341,9 @@ export default function ShelterHome() {
             </Modal>
             <Space direction="horizontal" align="center" style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Typography.Title level={3}>List of Animal</Typography.Title>
-                <Button
-                    icon={<PlusOutlined />}
-                    type="primary"
-                    onClick={() => {
-                        form.resetFields()
-                        setIsModalOpen(true)
-                    }}
-                >
-                    Add Animal
-                </Button>
             </Space>
             <Table
+                scroll={{ x: 2000 }}
                 loading={isLoading}
                 columns={columns}
                 dataSource={data?.data || []}

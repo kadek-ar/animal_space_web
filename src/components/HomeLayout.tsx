@@ -93,7 +93,9 @@ function HomeLayout() {
                 </Container>
                 <Footer>
                     <Container>
-                        Footer
+                        <Flex justify="center">
+                            <Typography.Text strong>Animal Space</Typography.Text>
+                        </Flex>
                     </Container>
                 </Footer>
             </Space>

@@ -1,4 +1,4 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined,UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined,ShoppingOutlined,UnorderedListOutlined,UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -38,8 +38,30 @@ export default function AdminLayout() {
                         },
                         {
                             key: '3',
-                            icon: <UploadOutlined />,
-                            label: 'nav 3',
+                            icon: <ShoppingOutlined />,
+                            label: 'All Transaction',
+                            onClick: () => navigate('/admin/transaction')
+                        },
+                        {
+                            key: '4',
+                            icon: <UnorderedListOutlined />,
+                            label: 'All Animal',
+                            onClick: () => navigate('/admin/animal')
+                        },
+                        {
+                            key: '5',
+                            icon: <ArrowLeftOutlined />,
+                            label: 'Animal Shelter',
+                            onClick: () => navigate('/')
+                        },
+                        {
+                            key: '6',
+                            icon: <LogoutOutlined />,
+                            label: 'Log out',
+                            onClick: () => {
+                                localStorage.clear()
+                                navigate('/login')
+                            }
                         },
                     ]}
                 />
