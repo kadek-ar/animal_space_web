@@ -73,7 +73,7 @@ function HomeLayout() {
                                 <Dropdown menu={{ items }}>
                                     <a onClick={(e) => e.preventDefault()}>
                                         <Space style={{color: '#fff'}}>
-                                            {getUser().username}
+                                            {getUser()?.username}
                                             <Avatar size="small" icon={<UserOutlined />} />
                                         </Space>
                                     </a>
