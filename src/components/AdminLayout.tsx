@@ -1,4 +1,4 @@
-import { ArrowLeftOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined,ShoppingOutlined,UnorderedListOutlined,UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import { AppstoreOutlined, ArrowLeftOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined,ShoppingOutlined,UnorderedListOutlined,UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -50,12 +50,18 @@ export default function AdminLayout() {
                         },
                         {
                             key: '5',
+                            icon: <AppstoreOutlined />,
+                            label: 'Slide Show Banner',
+                            onClick: () => navigate('/admin/banner')
+                        },
+                        {
+                            key: '6',
                             icon: <ArrowLeftOutlined />,
                             label: 'Animal Shelter',
                             onClick: () => navigate('/')
                         },
                         {
-                            key: '6',
+                            key: '7',
                             icon: <LogoutOutlined />,
                             label: 'Log out',
                             onClick: () => {

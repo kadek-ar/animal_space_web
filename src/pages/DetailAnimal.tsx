@@ -12,6 +12,14 @@ export default function DetailAnimal() {
     const { id } = useParams()
     const navigate = useNavigate()
     
+    const getUser = () => {
+        const auth = window.localStorage.getItem('user');
+        if (!auth) {
+            return null
+        }
+        const tmp = JSON.parse(auth)
+        return tmp
+    }
 
     const checkout = () => {
         
@@ -128,25 +136,27 @@ export default function DetailAnimal() {
                             </div>
                         </Space>
                     </Flex>
-                    <Flex gap="middle">
-                        <Button 
-                            icon={<ShoppingCartOutlined /> } 
-                            type="primary" 
-                            loading={loadingSubmit}
-                            onClick={addToCart}
-                        >
-                            Add To Cart
-                        </Button>
-                        <Button 
-                            icon={<SendOutlined /> } 
-                            type="primary" 
-                            loading={loadingSubmit}
-                            onClick={checkout}
-                            style={{ background: '#87d068' }}
-                        >
-                            Order now
-                        </Button>
-                    </Flex>
+                    { getUser()?.shelter_id !== data?.Shelter_id &&
+                        <Flex gap="middle">
+                            <Button 
+                                icon={<ShoppingCartOutlined /> } 
+                                type="primary" 
+                                loading={loadingSubmit}
+                                onClick={addToCart}
+                            >
+                                Add To Cart
+                            </Button>
+                            <Button 
+                                icon={<SendOutlined /> } 
+                                type="primary" 
+                                loading={loadingSubmit}
+                                onClick={checkout}
+                                style={{ background: '#87d068' }}
+                            >
+                                Order now
+                            </Button>
+                        </Flex>
+                    }
                 </Card>
                 <Card>
                     <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>

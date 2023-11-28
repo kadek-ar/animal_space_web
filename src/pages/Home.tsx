@@ -11,6 +11,7 @@ export default function Home() {
     const [loading, setLoading] = useState(false)
     const [category, setCategory] = useState<any>()
     // const { data, isLoading } = useSWR(`/animal-space`, fetcher);
+    const { data: dataBanner , mutate: mutateBanner, isLoading: isLoadingBanner } = useSWR('/admin/banner', fetcher);
 
     const getCategory = useCallback(() => {
         setLoading(true)
@@ -115,30 +116,22 @@ export default function Home() {
                     // autoplay
                     style={{ overflow: 'hidden', maxHeight: '500px' }}
                 >
-                    <div>
-                        {/* <Card style={contentStyle}>
-                            <h3>1</h3>
-                        </Card> */}
+                    { (dataBanner?.data || []).map((item: any, idx: number) => (
+                        <div>
+                            <Card>
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                    <img style={{ width: '100%' }} src={item?.image} alt={'bg_'+idx} />
+                                </div>
+                            </Card>
+                        </div>
+                    ))}
+                    {/* <div>
                         <Card>
                             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                                 <img style={{ width: '100%' }} src="https://cdn.trendhunterstatic.com/phpthumbnails/57/57586/57586_1_800.jpeg?auto=webp" alt="bg_1" />
                             </div>
                         </Card>
-                    </div>
-                    <div>
-                        <Card>
-                            <div>
-                                <img style={{ width: '100%' }} src="https://www.treehugger.com/thmb/9mhKZkdI6I3VE_Nec7lHMhQT4bA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Eddie-3a211f1aa6a54a908d0a5a6db50adf7a.jpeg" alt="bg_2" />
-                            </div>
-                        </Card>
-                    </div>
-                    <div>
-                        <Card>
-                            <div>
-                                <img style={{ width: '100%' }} src="https://www.thelondoneconomic.com/wp-content/uploads/2018/06/SWNS_VEGAN_ADD_01.jpg" alt="bg_3" />
-                            </div>
-                        </Card>
-                    </div>
+                    </div> */}
                 </Carousel>
                 <Divider />
                 <Typography.Title level={3}>Categories</Typography.Title>
@@ -148,6 +141,8 @@ export default function Home() {
                             <div style={CategoriesStyle}>
                                 <img style={{ height: '100%' }} onClick={() => navigate('/search-animal?category='+item.Name)} src={item.Image} alt={'category_'+idx} />
                             </div>
+                            <br />
+                            <Typography.Title style={{ textAlign: 'center' }} level={5}>{item?.Name}</Typography.Title>
                         </Col>
                     ))}
                 </Row>
