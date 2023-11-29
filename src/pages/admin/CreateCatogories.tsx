@@ -1,5 +1,5 @@
 import { CheckOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined, InboxOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import { Button, Card, Flex, Form, Input, Modal, Space, Spin, Table, Typography, Upload, UploadProps, message } from "antd";
+import { Button, Card, Divider, Flex, Form, Input, Modal, Space, Spin, Table, Typography, Upload, UploadProps, message } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { api, fetcher } from "../../utillities/api";
 import { useState, useEffect } from "react";
@@ -33,7 +33,7 @@ export default function CreateCatogories() {
     }
 
     const deleteApi = (id: number) => {
-        api.delete('/shelter/category/'+ id).then(() => {
+        api.delete('/shelter/category/' + id).then(() => {
             mutate()
             Modal.success({
                 title: 'Success',
@@ -99,9 +99,9 @@ export default function CreateCatogories() {
     ];
 
     const onFinish = (val: any) => {
-        if(isEdit){
+        if (isEdit) {
             setLoading(true)
-            api.put('/shelter/category/'+isEdit?.ID, val).then(() => {
+            api.put('/shelter/category/' + isEdit?.ID, val).then(() => {
                 Modal.success({
                     title: 'Success',
                     icon: <CheckOutlined />,
@@ -118,7 +118,7 @@ export default function CreateCatogories() {
             }).finally(() => {
                 setLoading(false)
             })
-        }else{
+        } else {
             setLoading(true)
             api.post('/shelter/category', val).then(() => {
                 Modal.success({
@@ -204,7 +204,27 @@ export default function CreateCatogories() {
                     </Form>
 
                 </div>
+                <Space direction="vertical" size="middle" className="only-on-mobile" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                    {(data?.data || []).map((item: any) => (
+                        <Card className="box-shadow card-animal-list" style={{ marginBottom: '20px' }} loading={isLoading}>
+                            <div style={{ width: '100%' }}>
+                                <img style={{ width: '100%' }} src={item.Image} alt="category_img" />
+                            </div>
+                            <Flex justify="center">
+                                <Typography.Title level={4}>{item.Name}</Typography.Title> <br />
+                            </Flex>
+                            <Divider />
+                            <Flex gap="small" >
+                                <Button type="primary" style={{ width: '50%' }} ghost icon={<EditOutlined />} onClick={() => editCategory(item)}>Edit</Button>
+                                <Button type="primary" style={{ width: '50%' }} ghost danger icon={<DeleteOutlined />} onClick={() => deleteDelete(item.ID)}>Delete</Button>
+                            </Flex>
+                        </Card>
+
+                    ))}
+                </Space>
                 <Table
+                    className="only-on-desktop"
+                    scroll={{ x: 2000 }}
                     loading={isLoading}
                     columns={columns}
                     dataSource={data?.data || []}

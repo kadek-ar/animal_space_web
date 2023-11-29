@@ -135,10 +135,10 @@ export default function Home() {
                 </Carousel>
                 <Divider />
                 <Typography.Title level={3}>Categories</Typography.Title>
-                <Row justify="space-between">
+                <Row justify="space-between" gutter={8}>
                     {(category || []).map((item: any, idx: number) => (
                         <Col>
-                            <div style={CategoriesStyle}>
+                            <div className="categories-list" >
                                 <img style={{ height: '100%' }} onClick={() => navigate('/search-animal?category='+item.Name)} src={item.Image} alt={'category_'+idx} />
                             </div>
                             <br />
@@ -185,6 +185,7 @@ export default function Home() {
                                 cover={<img alt="pet_pic" src={item?.Image} style={{ height: '244px', width: 'auto' }} />}
                                 style={{ width: '300px', overflow: 'hidden' }}
                                 onClick={() => navigate('/detail-animal/' + item?.Id)}
+                                className="card-animal"
                             >
                                 <Card.Meta
                                     title={item?.Name}

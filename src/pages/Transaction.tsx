@@ -25,7 +25,7 @@ export default function Transaction() {
 
                 <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
                     { (data?.data || []).map((item: any) => (
-                        <Card>
+                        <Card className="box-shadow">
                             <Flex align="baseline" justify="space-between">
                                 <Typography.Title level={5}>Transaction ID: {item.transaction_id}</Typography.Title>
                                 <div>

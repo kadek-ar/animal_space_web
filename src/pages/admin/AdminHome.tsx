@@ -1,8 +1,8 @@
-import { Button, Card, Flex, Modal, Table } from "antd";
+import { Button, Card, Col, Divider, Flex, Modal, Row, Space, Table, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useCallback, useEffect, useState } from "react";
 import { api } from "../../utillities/api";
-import { CloseCircleOutlined } from "@ant-design/icons";
+import { CheckOutlined, CloseCircleOutlined, CloseOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 export default function AdminHome() {
     const [data, setData] = useState<any>()
@@ -115,7 +115,55 @@ export default function AdminHome() {
 
     return (
         <Card>
+            <Space direction="horizontal" align="center" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Typography.Title level={3}>List of Approval Shelter</Typography.Title>
+            </Space>
+            <Divider />
+            <Space direction="vertical" size="middle" className="only-on-mobile" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                {(data || []).map((item: any) => (
+                    <Card className="box-shadow card-animal-list" style={{ marginBottom: '20px' }}>
+                        <Space direction="vertical" style={{ width: '100%' }}>
+                            <Row>
+                                <Col span={8}><Typography.Text strong>Name : </Typography.Text></Col>
+                                <Col span={16}><Typography.Text>{item.Name}</Typography.Text></Col>
+                            </Row>
+                            <Row>
+                                <Col span={8}><Typography.Text strong>Created by : </Typography.Text></Col>
+                                <Col span={16}><Typography.Text>{item.Owner_name}</Typography.Text></Col>
+                            </Row>
+                            <Row>
+                                <Col span={8}><Typography.Text strong>Created email : </Typography.Text></Col>
+                                <Col span={16}><Typography.Text>{item.Email_user}</Typography.Text></Col>
+                            </Row>
+                            <Row>
+                                <Col span={8}><Typography.Text strong>Phone : </Typography.Text></Col>
+                                <Col span={16}><Typography.Text>{item.Phone}</Typography.Text></Col>
+                            </Row>
+                            <Row>
+                                <Col span={8}><Typography.Text strong>Description : </Typography.Text></Col>
+                                <Col span={16}><Typography.Text>{item.Description}</Typography.Text></Col>
+                            </Row>
+                            <Row>
+                                <Col span={8}><Typography.Text strong>Status : </Typography.Text></Col>
+                                <Col span={16}><Typography.Text>{item.Status}</Typography.Text></Col>
+                            </Row>
+                        </Space>
+                        {
+                            item?.Status === 'pending' &&
+                            <>
+                                <Divider />
+                                <Flex gap="small" >
+                                    <Button type="primary" style={{ width: '50%' }} ghost icon={<CheckOutlined />} onClick={() => approve(item.Id)}>Approve</Button>
+                                    <Button type="primary" style={{ width: '50%' }} ghost danger icon={<CloseOutlined />} onClick={() => reject(item.Id)}>Reject</Button>
+                                </Flex>
+                            </>
+                        }
+                    </Card>
+                ))}
+            </Space>
             <Table
+                className="only-on-desktop"
+                scroll={{ x: 2000 }}
                 columns={columns}
                 dataSource={data}
             />

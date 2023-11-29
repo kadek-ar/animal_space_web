@@ -1,8 +1,7 @@
-import { Avatar, Card, Carousel, Col, Dropdown, Flex, Input, Layout, MenuProps, Row, Space, Typography } from "antd"
+import { Avatar, Dropdown, Flex, Input, Layout, MenuProps, Space, Typography } from "antd"
 import { Container } from 'react-bootstrap'
 import { Outlet, useNavigate } from "react-router-dom";
-import { useEffect } from 'react'
-import { DownOutlined, LogoutOutlined, SearchOutlined, ShoppingCartOutlined, ShoppingOutlined, UserOutlined } from "@ant-design/icons";
+import { LogoutOutlined, SearchOutlined, ShoppingCartOutlined, ShoppingOutlined, UserOutlined } from "@ant-design/icons";
 
 const { Header, Footer, Content } = Layout;
 
@@ -30,6 +29,11 @@ function HomeLayout() {
             navigate('/login')
           }
         },
+        {
+          key: '2',
+          label: getUser()?.username,
+          icon: <UserOutlined />,
+        },
       ];
 
     const onSearch = (val: string) => {
@@ -43,19 +47,21 @@ function HomeLayout() {
                 background: '#fff',
             }}
         >
-            <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
+            <Space direction="vertical" size="middle" className="space-header-home">
                 <Header
                     style={{
                         display: 'flex',
                         alignItems: 'center'
                     }}
+                    className="header-home"
                 >
                     <Container >
-                        <Flex wrap="wrap" gap="small" justify="space-between" align="center">
+                        <Flex gap="small" justify="space-between" align="center">
                             <Typography.Title 
                                 style={{ marginBottom: 0, color: "#fff" }} 
                                 level={1}
                                 onClick={() => navigate('/')}
+                                className="only-on-desktop"
                             >
                                 Animal Space
                             </Typography.Title>
@@ -66,6 +72,7 @@ function HomeLayout() {
                                 onSearch={onSearch}
                                 style={{ width: 304 }}
                                 defaultValue={searchParams.get('search') || ''}
+                                className="input-search-home"
                             />
                             <Flex gap="large" wrap="wrap">
                                 <ShoppingCartOutlined style={{color: '#fff'}} onClick={() => navigate('/cart')} />
@@ -73,8 +80,7 @@ function HomeLayout() {
                                 <Dropdown menu={{ items }}>
                                     <a onClick={(e) => e.preventDefault()}>
                                         <Space style={{color: '#fff'}}>
-                                            {getUser()?.username}
-                                            <Avatar size="small" icon={<UserOutlined />} />
+                                            <Avatar style={{ marginBottom: '4px' }} size="small" icon={<UserOutlined />} />
                                         </Space>
                                     </a>
                                 </Dropdown>

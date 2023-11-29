@@ -1,5 +1,5 @@
 import { CheckOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Card, Flex, Form, Input, InputNumber, Modal, Select, Space, Spin, Table, Typography } from "antd";
+import { Button, Card, Col, Divider, Flex, Form, Input, InputNumber, Modal, Row, Select, Space, Spin, Table, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useState } from "react";
 import { api, fetcher } from "../../utillities/api";
@@ -75,11 +75,6 @@ export default function ShelterHome() {
             title: 'Animal Age',
             dataIndex: 'Age',
             key: 'Age',
-        },
-        {
-            title: 'Number of Animal',
-            dataIndex: 'Quantity',
-            key: 'name',
         },
         {
             title: 'Description',
@@ -218,7 +213,7 @@ export default function ShelterHome() {
     }
 
     return (
-        <Card>
+        <Card className="card-content-animal">
             <Modal
                 title="Add New Animal"
                 open={isModalOpen}
@@ -345,7 +340,58 @@ export default function ShelterHome() {
                     Add Animal
                 </Button>
             </Space>
+            <Space direction="vertical" size="middle" className="only-on-mobile" style={{ marginTop: '10px', marginBottom: '10px' }}>
+                { (data?.data || []).map((item: any) => (
+                    <Card className="box-shadow card-animal-list" style={{ marginBottom: '20px' }}>
+                        <Flex gap="middle">
+                            <div style={{ width: '100px' }}>
+                                <img style={{ width: '100%' }} src={item.Image} alt="category_img" />
+                            </div>
+                            <Space direction="vertical" style={{ width: '64%' }}>
+                                <Row>
+                                    <Col span={12}><Typography.Text strong>Name : </Typography.Text></Col>
+                                    <Col span={12}><Typography.Text>{item.Name}</Typography.Text></Col>
+                                </Row>
+                                <Row>
+                                    <Col span={12}><Typography.Text strong>Category</Typography.Text></Col>
+                                    <Col span={12}><Typography.Text>{findCategoriesName(item?.CategoryID)?.Name}</Typography.Text></Col>
+                                </Row>
+                                <Row>
+                                    <Col span={12}><Typography.Text strong>Type</Typography.Text></Col>
+                                    <Col span={12}><Typography.Text>{item.Type}</Typography.Text></Col>
+                                </Row>
+                                <Row>
+                                    <Col span={12}><Typography.Text strong>Age in Year</Typography.Text></Col>
+                                    <Col span={12}><Typography.Text>{item.Age}</Typography.Text></Col>
+                                </Row>
+                                <Row>
+                                    <Col span={12}><Typography.Text strong>Age in Month</Typography.Text></Col>
+                                    <Col span={12}><Typography.Text>{item.Month}</Typography.Text></Col>
+                                </Row>
+                                <Row>
+                                    <Col span={12}><Typography.Text strong>Price</Typography.Text></Col>
+                                    <Col span={12}><Typography.Text>{item.Price}</Typography.Text></Col>
+                                </Row>
+                                <Row>
+                                    <Col span={12}><Typography.Text strong>Status</Typography.Text></Col>
+                                    <Col span={12}><Typography.Text>{item.Status}</Typography.Text></Col>
+                                </Row>
+                            </Space>
+                        </Flex>
+                        <Typography.Text strong>Description :</Typography.Text> <br />
+                        <p>{item.Description}</p>
+                        <Divider />
+                        <Flex gap="small" >
+                            <Button type="primary" style={{ width: '50%' }} ghost icon={<EditOutlined />} onClick={() => editAnimal(item.ID)}>Edit</Button>
+                            <Button type="primary" style={{ width: '50%' }} ghost danger icon={<DeleteOutlined /> } onClick={() => deleteAnimal(item.ID)}>Delete</Button>
+                        </Flex>
+                    </Card>
+                    
+                ))}
+            </Space>
             <Table
+                className="only-on-desktop"
+                scroll={{ x: 1100 }}
                 loading={isLoading}
                 columns={columns}
                 dataSource={data?.data || []}

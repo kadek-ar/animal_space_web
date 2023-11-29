@@ -67,7 +67,7 @@ export default function TransactionDetail() {
             <Typography.Title level={4}>List of product</Typography.Title>
             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
                 {(list || []).map((item: any, idx: number) => (
-                    <Card>
+                    <Card className="box-shadow">
                         <Flex gap="small" wrap="wrap" justify="space-between" align="center">
                             <Typography.Title level={3}>{item.AnimalName}</Typography.Title>
                             <div>
@@ -97,7 +97,7 @@ export default function TransactionDetail() {
                                     <ShopOutlined />
                                     <Typography.Text strong>{item.ShelterName}</Typography.Text>
                                 </Flex>
-                                <Flex gap="small">
+                                <Flex gap="small" wrap="wrap" className="contact-shelter-transaction">
                                     <Typography.Text> Contact : </Typography.Text>
                                     <Tag icon={<PhoneOutlined />} color="#55acee">
                                         {item.ShelterPhone}

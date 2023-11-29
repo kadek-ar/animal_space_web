@@ -1,6 +1,7 @@
 html {
   height: 100%;
 }
+
 body {
   min-height: 100%;
 }
@@ -10,6 +11,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -30,11 +32,94 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+
+.only-on-mobile {
+  display: none;
+}
+
+.only-on-desktop {
+  display: block;
+}
+
+.card-animal {
+  box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.box-shadow {
+  box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.categories-list {
+  border-radius: 82%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px
+}
+
+.space-header-home {
+  display: flex;
+}
+
+@media (max-width: 600px) {
+  .only-on-mobile {
+    display: block;
+  }
+
+  .only-on-desktop {
+    display: none !important;
+  }
+
+  .header-home {
+    padding: 0;
+  }
+
+  .space-header-home {
+    margin: 0;
+  }
+
+  .input-search-home {
+    width: 61vw !important;
+  }
+
+  .card-animal {
+    width: 49% !important;
+  }
+
+  .card-animal img {
+    height: 173px !important;
+  }
+
+  .categories-list{
+    width: 130px;
+    height: 130px;
+  }
+
+  .contact-shelter-transaction{
+    justify-content: end !important;
+  }
+
+  .content-layout{
+    padding: 0 !important;
+  }
+
+  .card-animal-list .ant-card-body{
+    padding: 10px;
+  }
+
+  .card-content-animal .ant-card-body{
+    padding: 10px;
+  }
+}

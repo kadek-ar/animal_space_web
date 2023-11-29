@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Form, InputNumber, Modal, Select, Space, Spin, Typography } from "antd";
+import { Button, Card, Divider, Flex, Form, InputNumber, Modal, Select, Space, Spin, Typography } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { api } from "../utillities/api";
 import { CloseCircleOutlined } from "@ant-design/icons";
@@ -145,6 +145,7 @@ export default function SearchPage() {
                     </Flex>
                 </Flex>
             </Form>
+            <Divider />
             <Spin spinning={loading}>
                 <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
                     
@@ -155,6 +156,7 @@ export default function SearchPage() {
                                 cover={<img alt="pet_pic" src={item?.Image} style={{ height: '244px', width: 'auto' }} />}
                                 style={{ width: '300px', overflow: 'hidden' }}
                                 onClick={() => navigate('/detail-animal/'+item?.Id)}
+                                className="card-animal"
                             >
                                 <Card.Meta
                                     title={item?.Name}

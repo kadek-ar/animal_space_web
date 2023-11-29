@@ -71,7 +71,7 @@ export default function Cart() {
             <Typography.Title level={1}>Cart</Typography.Title>
             <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
                 {(data?.data || []).map((rec: any) => (
-                    <Card>
+                    <Card className="box-shadow">
                         <Flex gap="large" wrap="wrap">
                             <div style={{ width: '150px' }}>
                                 <img style={{ width: '100%' }} src={rec?.Animal?.Image} alt="category_img" />
@@ -92,36 +92,38 @@ export default function Cart() {
                 ))}
             </Space>
             <Divider />
-            <Card>
-                <Typography.Title
-                    level={3}
-                >
-                    Order Summary
-                </Typography.Title>
-                <Flex gap="large" wrap="wrap" justify="space-between">
-                    <Typography.Text strong>
-                        {(data?.data || []).length} Animal
-                    </Typography.Text>
-                    <Space direction="horizontal" size="large" style={{ display: 'flex'}}>
+            <Card className="box-shadow">
+                <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
+                    <Typography.Title
+                        level={3}
+                    >
+                        Order Summary
+                    </Typography.Title>
+                    <Flex gap="large" wrap="wrap" justify="space-between">
                         <Typography.Text strong>
-                            Total
+                            {(data?.data || []).length} Animal
                         </Typography.Text>
-                        <Typography.Text >
-                            Rp {totalPrice().toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}   
-                        </Typography.Text>
-                    </Space>
-                </Flex>
+                        <Space direction="horizontal" size="large" style={{ display: 'flex'}}>
+                            <Typography.Text strong>
+                                Total
+                            </Typography.Text>
+                            <Typography.Text >
+                                Rp {totalPrice().toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}   
+                            </Typography.Text>
+                        </Space>
+                    </Flex>
+                    <Flex justify="end">
+                        <Button 
+                            icon={<ShoppingOutlined /> } 
+                            type="primary" 
+                            // loading={loadingSubmit}
+                            onClick={checkout}
+                        >
+                            Checkout
+                        </Button>
+                    </Flex>
+                </Space>
             </Card>
-            <Flex justify="end">
-                <Button 
-                    icon={<ShoppingOutlined /> } 
-                    type="primary" 
-                    // loading={loadingSubmit}
-                    onClick={checkout}
-                >
-                    Checkout
-                </Button>
-            </Flex>
 
         </Spin>
     )

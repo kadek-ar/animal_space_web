@@ -20,16 +20,13 @@ function Register() {
 
     return (
         <Container>
-            <Flex gap="small" wrap="wrap">
-                <Button type="primary" onClick={() => navigate('/login')}>Login</Button>
-            </Flex>
-            <Card>
-                <Typography.Title level={3}>Register</Typography.Title>
+            <Card className="box-shadow" style={{ marginTop: '60px', marginLeft: 'auto', marginRight: 'auto', maxWidth: '400px' }}>
+                <Flex justify="center">
+                    <Typography.Title level={3}>Register</Typography.Title>
+                </Flex>
                 <Form
                     name="basic"
-                    labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 16 }}
-                    style={{ maxWidth: 600 }}
+                    labelCol={{ span: 24 }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     // onFinishFailed={onFinishFailed}
@@ -57,11 +54,14 @@ function Register() {
                         <Input.Password />
                     </Form.Item>
 
-                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
                         <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
                     </Form.Item>
+                    <Flex justify="center">
+                        <Button type="link" onClick={() => navigate('/login')}>Have an account? login here</Button>
+                    </Flex>
                 </Form>
             </Card>
         </Container>

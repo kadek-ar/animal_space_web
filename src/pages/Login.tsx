@@ -36,28 +36,27 @@ export default function Login() {
     const onFinish = async (val: any) => {
         await api.post('/login', val).then((res) => {
             storeToken(res)
+            getUser(navigate);
         }).catch((err) => {
             confirm({
                 title: 'Error to login',
                 icon: <CloseCircleOutlined />,
-                content: `${err.toString()}`,
+                content: `${(err?.response?.data?.error)}`,
             });
         })
-        getUser(navigate);
     }
 
     return (
-        <Container >
-            <Flex gap="small" wrap="wrap">
-                <Button type="primary" onClick={() => navigate('/register')}>Register</Button>
-            </Flex>
-            <Card>
+        <Container className="login-container">
+            <Card className="box-shadow" style={{ marginTop: '60px', marginLeft: 'auto', marginRight: 'auto', maxWidth: '400px' }}>
+            <Flex justify="center">
                 <Typography.Title level={3}>Login</Typography.Title>
+            </Flex>
+            <Flex gap="small" wrap="wrap">
+            </Flex>
                 <Form
                     name="basic"
-                    labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 16 }}
-                    style={{ maxWidth: 600 }}
+                    labelCol={{ span: 24 }}
                     initialValues={{ remember: true }}
                     onFinish={onFinish}
                     // onFinishFailed={onFinishFailed}
@@ -79,11 +78,14 @@ export default function Login() {
                         <Input.Password />
                     </Form.Item>
 
-                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
                         <Button type="primary" htmlType="submit">
                             Submit
                         </Button>
                     </Form.Item>
+                    <Flex justify="center">
+                        <Button type="link" onClick={() => navigate('/register')}>Dont't have account? register here</Button>
+                    </Flex>
                 </Form>
             </Card>
         </Container>
