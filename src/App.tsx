@@ -25,17 +25,18 @@ import AdminTransaction from './pages/admin/AdminTransaction'
 import AdminTransactionDetail from './pages/admin/AdminTransactionDetail'
 import AdminAnimal from './pages/admin/AdminAnimal'
 import AdminBanner from './pages/admin/AdminBanner'
+import ShelterAnimal from './pages/shelter/ShelterAnimal'
 
 function App() {
-  const navigate = useNavigate()
-  useEffect(() => {
-    if(window.location.pathname !== "/login" && window.location.pathname !== "/register"){
-      if(!localStorage.getItem('auth')){
-        localStorage.clear();
-        navigate("/login")
-      }
-    }
-  }, [window.location.pathname])
+  // const navigate = useNavigate()
+  // useEffect(() => {
+  //   if(window.location.pathname !== "/login" && window.location.pathname !== "/register"){
+  //     if(!localStorage.getItem('auth')){
+  //       localStorage.clear();
+  //       navigate("/login")
+  //     }
+  //   }
+  // }, [window.location.pathname])
   return (
     <Routes>
       {/* <Route path='/' element={<Home />}></Route> */}
@@ -49,6 +50,7 @@ function App() {
         <Route path="transaction" element={<Transaction />}/>
         <Route path="transaction/:id" element={<TransactionDetail />}/>
         <Route path="transaction/success" element={<SuccessPage />}/>
+        <Route path="animal/shelter/:id" element={<ShelterAnimal />}/>
         {/* <Route path="tasks" element={<DashboardTasks />} /> */}
       </Route>
       <Route path="/admin" element={<AdminLayout />}>

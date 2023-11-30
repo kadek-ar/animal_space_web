@@ -136,7 +136,7 @@ export default function DetailAnimal() {
                             </div>
                         </Space>
                     </Flex>
-                    { getUser()?.shelter_id !== data?.Shelter_id &&
+                    { (getUser() && getUser()?.shelter_id !== data?.Shelter_id) &&
                         <Flex gap="middle">
                             <Button 
                                 icon={<ShoppingCartOutlined /> } 
@@ -166,7 +166,7 @@ export default function DetailAnimal() {
                                 <Typography.Text>Name   :</Typography.Text>
                             </Col>
                             <Col>
-                                <Typography.Text strong>{data?.Shelter_name}</Typography.Text>
+                                <Typography.Link strong onClick={() => { navigate('/animal/shelter/'+data?.Shelter_id) }}>{data?.Shelter_name}</Typography.Link>
                             </Col>
                         </Row>
                         <Row>

@@ -1,7 +1,7 @@
 import { Avatar, Dropdown, Flex, Input, Layout, MenuProps, Space, Typography } from "antd"
 import { Container } from 'react-bootstrap'
 import { Outlet, useNavigate } from "react-router-dom";
-import { LogoutOutlined, SearchOutlined, ShoppingCartOutlined, ShoppingOutlined, UserOutlined } from "@ant-design/icons";
+import { LoginOutlined, LogoutOutlined, SearchOutlined, ShoppingCartOutlined, ShoppingOutlined, UserOutlined } from "@ant-design/icons";
 
 const { Header, Footer, Content } = Layout;
 
@@ -19,7 +19,19 @@ function HomeLayout() {
         return tmp
     }
 
-    const items: MenuProps['items'] = [
+    const items: MenuProps['items'] =  !getUser() ? [
+        {
+          key: '1',
+          label: "Login",
+          icon: <LoginOutlined />,
+          onClick: () => {
+            localStorage.clear()
+            navigate('/login')
+          }
+        }
+    ]
+        :
+    [
         {
           key: '1',
           label: "Logout",
@@ -34,7 +46,7 @@ function HomeLayout() {
           label: getUser()?.username,
           icon: <UserOutlined />,
         },
-      ];
+    ];
 
     const onSearch = (val: string) => {
         searchParams.set('search', val || '')
