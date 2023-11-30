@@ -77,6 +77,11 @@ export default function Home() {
 
     const ButtonCreateShelter = () => {
         const user = getUser()
+
+        if(!getUser()){
+            return null
+        }
+
         if (user?.shelter_status === 'approve') {
             return (
                 <Button onClick={() => navigate('/shelter/home')}>
