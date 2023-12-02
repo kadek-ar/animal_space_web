@@ -26,6 +26,7 @@ import AdminTransactionDetail from './pages/admin/AdminTransactionDetail'
 import AdminAnimal from './pages/admin/AdminAnimal'
 import AdminBanner from './pages/admin/AdminBanner'
 import ShelterAnimal from './pages/shelter/ShelterAnimal'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   // const navigate = useNavigate()
@@ -37,6 +38,16 @@ function App() {
   //     }
   //   }
   // }, [window.location.pathname])
+
+  const getUser = () => {
+      const auth = window.localStorage.getItem('user');
+      if (!auth) {
+          return null
+      }
+      const tmp = JSON.parse(auth)
+      return tmp
+  }
+
   return (
     <Routes>
       {/* <Route path='/' element={<Home />}></Route> */}
@@ -53,21 +64,26 @@ function App() {
         <Route path="animal/shelter/:id" element={<ShelterAnimal />}/>
         {/* <Route path="tasks" element={<DashboardTasks />} /> */}
       </Route>
-      <Route path="/admin" element={<AdminLayout />}>
-        <Route path="home" element={<AdminHome />} />
-        <Route path="category" element={<CreateCatogories />} />
-        <Route path="transaction" element={<AdminTransaction />} />
-        <Route path="transaction/detail/:shelter_id/:id" element={<AdminTransactionDetail />} />
-        <Route path="animal" element={<AdminAnimal />} />
-        <Route path="banner" element={<AdminBanner />} />
-      </Route>
-      <Route path="/shelter" element={<ShelterLayout />}>
-        <Route path="home" element={<ShelterHome />} />
-        <Route path="transaction" element={<ShelterTransaction />} />
-        <Route path="transaction/detail/:id" element={<ShelterTransactionDetail />} />
-      </Route>
+      { getUser()?.role === "admin" &&
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="home" element={<AdminHome />} />
+          <Route path="category" element={<CreateCatogories />} />
+          <Route path="transaction" element={<AdminTransaction />} />
+          <Route path="transaction/detail/:shelter_id/:id" element={<AdminTransactionDetail />} />
+          <Route path="animal" element={<AdminAnimal />} />
+          <Route path="banner" element={<AdminBanner />} />
+        </Route>
+      }
+      { getUser()?.shelter_id &&
+        <Route path="/shelter" element={<ShelterLayout />}>
+          <Route path="home" element={<ShelterHome />} />
+          <Route path="transaction" element={<ShelterTransaction />} />
+          <Route path="transaction/detail/:id" element={<ShelterTransactionDetail />} />
+        </Route>
+      }
       <Route path='/login' element={<Login />}></Route>
       <Route path='/register' element={<Register />}></Route>
+      <Route path='*' element={<NotFoundPage />}></Route>
     </Routes>
   )
 }

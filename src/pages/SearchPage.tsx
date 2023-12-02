@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { api } from "../utillities/api";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 export default function SearchPage() {
     const [form] = Form.useForm();
@@ -90,87 +91,117 @@ export default function SearchPage() {
     }
 
     return (
-        <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
-            <Typography.Title level={3}>Search list</Typography.Title>
-            <Form
-                form={form}
-                initialValues={{
-                    category: searchParams.get('category'),
-                    min_age: searchParams.get('from_age'),
-                    max_age: searchParams.get('to_age'),
-                    min_age_month: searchParams.get('from_month'),
-                    max_age_month: searchParams.get('to_month')
-                }}
-            >
-                <Flex wrap="wrap" gap="middle" align="center">
-                    <Flex wrap="wrap" gap="small" align="center">
-                        <Typography.Text strong>Filter Category : </Typography.Text>
-                        <Form.Item
-                            name={['category']}
-                            noStyle
+        <Container>
+            <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
+                <Typography.Title level={1} style={{ color: '#0174BE' }}>Search list</Typography.Title>
+                <div className="search-list">
+                    <Card className="box-shadow search-list-col1">
+                        <Form
+                            form={form}
+                            initialValues={{
+                                category: searchParams.get('category'),
+                                min_age: searchParams.get('from_age'),
+                                max_age: searchParams.get('to_age'),
+                                min_age_month: searchParams.get('from_month'),
+                                max_age_month: searchParams.get('to_month')
+                            }}
                         >
-                            <Select
-                                style={{ width: 200 }}
-                                onChange={categoryChange}
-                                placeholder="Filter by category"
-                                allowClear
-                                options={
-                                    (category || []).map((item: any) => ({
-                                        label: item.Name,
-                                        value: item.Name
-                                    }))
-                                }
-                            />
-                        </Form.Item>
-                    </Flex>
-                    <Flex wrap="wrap" gap="small" align="center">
-                        <Typography.Text strong>Filter range of Age (year) : </Typography.Text>
-                        <Form.Item name={['min_age']} noStyle>
-                            <InputNumber placeholder="Min Age" min={0} onChange={(val: any) => setAge({...age, min: val}) } />
-                        </Form.Item>
-                        <Form.Item name={['max_age']} noStyle>
-                            <InputNumber placeholder="Max Age" onChange={(val: any) => setAge({...age, max: val}) } />
-                        </Form.Item>
-                        <Button onClick={() => filterAge()}>Search by Age (year)</Button>
-                    </Flex>
-                    <Flex wrap="wrap" gap="small" align="center">
-                        <Typography.Text strong>Filter range of Age (month) : </Typography.Text>
-                        <Form.Item name={['min_age_month']} noStyle>
-                            <InputNumber placeholder="Min Age" min={0} onChange={(val: any) => setMonth({...month, min: val}) } />
-                        </Form.Item>
-                        <Form.Item name={['max_age_month']} noStyle>
-                            <InputNumber placeholder="Max Age" onChange={(val: any) => setMonth({...month, max: val}) } />
-                        </Form.Item>
-                        <Button onClick={() => filterMonth()}>Search by Age (month)</Button>
-                    </Flex>
-                </Flex>
-            </Form>
-            <Divider />
-            <Spin spinning={loading}>
-                <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
-                    
-                    <Flex wrap="wrap" gap="small">
-                        {(data || []).map((item: any) => (
-                            <Card
-                                hoverable
-                                cover={<img alt="pet_pic" src={item?.Image} style={{ height: '244px', width: 'auto' }} />}
-                                style={{ width: '300px', overflow: 'hidden' }}
-                                onClick={() => navigate('/detail-animal/'+item?.Id)}
-                                className="card-animal"
-                            >
-                                <Card.Meta
-                                    title={item?.Name}
-                                    description={(
-                                        <Space direction="vertical" size="middle">
-                                            <Typography.Title level={5}>Rp {item?.Price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</Typography.Title>
-                                        </Space>
-                                    )}
-                                />
-                            </Card>
-                        ))}
-                    </Flex>
-                </Space>
-            </Spin>
-        </Space>
+                            <Flex wrap="wrap" gap="middle" align="center">
+                                <Space direction="vertical" style={{ width: '100%' }}>
+                                    <Typography.Text strong>Filter Category </Typography.Text>
+                                    <Form.Item
+                                        name={['category']}
+                                        style={{ marginBottom: 0 }}
+                                    >
+                                        <Select
+                                            className="search-category"
+                                            onChange={categoryChange}
+                                            placeholder="Filter by category"
+                                            allowClear
+                                            options={
+                                                (category || []).map((item: any) => ({
+                                                    label: item.Name,
+                                                    value: item.Name
+                                                }))
+                                            }
+                                        />
+                                    </Form.Item>
+                                </Space>
+                                <Divider className="only-on-desktop" />
+                                <Space direction="vertical" style={{ width: '100%' }}>
+                                    <Typography.Text strong>Filter range of Age (year) </Typography.Text>
+                                    <Flex gap="small" style={{ width: '100%' }}>
+                                        <Form.Item name={['min_age']} style={{ width: '50%', marginBottom: 0 }}>
+                                            <InputNumber 
+                                                placeholder="Min Age" 
+                                                min={0} 
+                                                onChange={(val: any) => setAge({...age, min: val}) } 
+                                                style={{ width: '100%' }}
+                                            />
+                                        </Form.Item>
+                                        <Form.Item name={['max_age']} style={{ width: '50%', marginBottom: 0 }}>
+                                            <InputNumber 
+                                                placeholder="Max Age" 
+                                                onChange={(val: any) => 
+                                                setAge({...age, max: val}) } 
+                                                style={{ width: '100%' }}
+                                            />
+                                        </Form.Item>
+                                    </Flex>
+                                    <Button onClick={() => filterAge()} block>Search by Age (year)</Button>
+                                </Space>
+                                <Divider className="only-on-desktop" />
+                                <Space direction="vertical" style={{ width: '100%' }}>
+                                    <Typography.Text strong>Filter range of Age (month) </Typography.Text>
+                                    <Flex gap="small" className="search-list-col1-grid" style={{ width: '100%' }}>
+                                        <Form.Item name={['min_age_month']} style={{ width: '50%', marginBottom: 0 }}>
+                                            <InputNumber 
+                                                placeholder="Min Age" 
+                                                min={0} 
+                                                onChange={(val: any) => setMonth({...month, min: val}) } 
+                                                style={{ width: '100%' }}
+                                            />
+                                        </Form.Item>
+                                        <Form.Item name={['max_age_month']} style={{ width: '50%', marginBottom: 0 }}>
+                                            <InputNumber 
+                                                placeholder="Max Age" 
+                                                onChange={(val: any) => setMonth({...month, max: val}) } 
+                                                style={{ width: '100%' }}
+                                            />
+                                        </Form.Item>
+                                    </Flex>
+                                    <Button onClick={() => filterMonth()} block>Search by Age (month)</Button>
+                                </Space>
+                            </Flex>
+                        </Form>
+                    </Card>
+                    <Spin spinning={loading} className="search-list-col2">
+                        <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
+                            
+                            <Flex wrap="wrap" gap="small">
+                                {(data || []).map((item: any) => (
+                                    <Card
+                                        hoverable
+                                        cover={<img alt="pet_pic" src={item?.Image} style={{ height: '244px', width: 'auto' }} />}
+                                        style={{ width: '300px', overflow: 'hidden' }}
+                                        onClick={() => navigate('/detail-animal/'+item?.Id)}
+                                        className="card-animal"
+                                    >
+                                        <Card.Meta
+                                            title={item?.Name}
+                                            description={(
+                                                <Space direction="vertical" size="middle">
+                                                    <Typography.Title level={5}>Rp {item?.Price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</Typography.Title>
+                                                </Space>
+                                            )}
+                                        />
+                                    </Card>
+                                ))}
+                            </Flex>
+                        </Space>
+                    </Spin>
+                </div>
+            </Space>
+        </Container>
     )
 }

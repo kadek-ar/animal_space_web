@@ -1,8 +1,10 @@
-import { Button, Card, Col, Divider, Flex, Modal, Row, Space, Spin, Typography, message } from "antd";
+import { Button, Card, Col, Divider, Flex, Modal, Row, Space, Spin, Tag, Typography, message } from "antd";
 import { useCallback, useEffect, useState } from "react";
 import { api } from "../utillities/api";
-import { CheckOutlined, CloseCircleOutlined, SendOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { CheckOutlined, CloseCircleOutlined, EnvironmentOutlined, PhoneOutlined, SendOutlined, ShopOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import "@fontsource/montserrat"
 
 export default function DetailAnimal() {
     const [loading, setLoading] = useState(false)
@@ -94,93 +96,102 @@ export default function DetailAnimal() {
     }
     
     return (
-        <Spin spinning={loading}>
-             {contextHolder}
-            <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
-                <Card>
-                    <Flex wrap="wrap" gap="middle">
-                        <div style={{ width: '435px' }}>
-                            <img style={{ width: '100%' }} src={data?.Image || ''} alt="detail_animal_pic" />
-                        </div>
-                        <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px', width: '500px' }}>
-                            <Typography.Title level={2}>{data?.Name}</Typography.Title>
-                            <Typography.Title level={4} style={{ color: '#EB9A10' }}>Rp {data?.Price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</Typography.Title>
-                            <Divider />
-                            <Row>
-                                <Col span={10}>
-                                    <Typography.Text>Kategori :</Typography.Text>
-                                </Col>
-                                <Col>
-                                    <Typography.Text strong>{data?.Category_name}</Typography.Text>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col span={10}>
-                                    <Typography.Text>Jenis    :</Typography.Text>
-                                </Col>
-                                <Col>
-                                    <Typography.Text strong>{data?.Type}</Typography.Text>
-                                </Col>
-                            </Row>
-                            {/* <Row>
-                                <Col span={10}>
-                                    <Typography.Text>Jumlah   :</Typography.Text>
-                                </Col>
-                                <Col>
-                                    <Typography.Text strong>{data?.Quantity}</Typography.Text>
-                                </Col>
-                            </Row> */}
+        <Container>
+            <Spin spinning={loading}>
+                {contextHolder}
+                <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
+                    <Card className="box-shadow">
+                        <Flex wrap="wrap" gap="middle">
+                            <div style={{ width: '435px' }}>
+                                <img style={{ width: '100%' }} src={data?.Image || ''} alt="detail_animal_pic" />
+                            </div>
+                            <Space direction="vertical" size="small" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px', width: '500px' }}>
+                                <Typography.Title level={2} style={{ marginBottom: 0 }}>{data?.Name}</Typography.Title>
+                                <Typography.Title level={4} style={{ color: '#0174BE', marginBottom: 0 }}>Rp {data?.Price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")}</Typography.Title>
+                                <Divider />
+                                <Row>
+                                    <Col span={10}>
+                                        <Typography.Text>Kategori :</Typography.Text>
+                                    </Col>
+                                    <Col>
+                                        <Typography.Text strong>{data?.Category_name}</Typography.Text>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col span={10}>
+                                        <Typography.Text>Jenis    :</Typography.Text>
+                                    </Col>
+                                    <Col>
+                                        <Typography.Text strong>{data?.Type}</Typography.Text>
+                                    </Col>
+                                </Row>
+                                {/* <Row>
+                                    <Col span={10}>
+                                        <Typography.Text>Jumlah   :</Typography.Text>
+                                    </Col>
+                                    <Col>
+                                        <Typography.Text strong>{data?.Quantity}</Typography.Text>
+                                    </Col>
+                                </Row> */}
+                                <div>
+                                    <Typography.Text>Deskripsi   :</Typography.Text>
+                                    <p style={{ marginTop: '10px' }}>{data?.Description}</p>
+                                </div>
+                                { (getUser() && getUser()?.shelter_id !== data?.Shelter_id) &&
+                                    <Flex gap="middle">
+                                        <Button 
+                                            icon={<ShoppingCartOutlined /> } 
+                                            type="primary" 
+                                            loading={loadingSubmit}
+                                            onClick={addToCart}
+                                        >
+                                            Add To Cart
+                                        </Button>
+                                        <Button 
+                                            icon={<SendOutlined /> } 
+                                            type="primary" 
+                                            loading={loadingSubmit}
+                                            onClick={checkout}
+                                            style={{ background: '#87d068' }}
+                                        >
+                                            Order now
+                                        </Button>
+                                    </Flex>
+                                }
+                            </Space>
+                        </Flex>
+                    </Card>
+                    <Card className="box-shadow">
+                        <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
+                            <Typography.Title style={{ color: '#0174BE', marginBottom: 0 }} level={3}>Shelter</Typography.Title>
                             <div>
-                                <Typography.Text strong>Deskripsi   :</Typography.Text>
-                                <p style={{ marginTop: '10px' }}>{data?.Description}</p>
+                                <Flex gap={"middle"} align="center">
+                                    <div className="shelter-info-detail" >
+                                        <ShopOutlined style={{ fontSize: '50px' }} />
+                                    </div>
+                                    <Space direction="vertical" size="small">
+                                        <Typography.Link 
+                                            strong 
+                                            onClick={() => { navigate('/animal/shelter/'+data?.Shelter_id) }}
+                                            style={{ fontSize: '20px' }}
+                                        >
+                                            {data?.Shelter_name}
+                                        </Typography.Link> 
+                                        <Tag icon={<PhoneOutlined />} color="#55acee">
+                                            {data?.Shelter_Phone}
+                                        </Tag>
+                                        <Flex gap={"middle"}>
+                                            <EnvironmentOutlined style={{ color: '#0174BE' }} />
+                                            <Typography.Text strong>{data?.Shelter_Address}</Typography.Text>
+                                        </Flex>
+                                    </Space>
+                                </Flex>
                             </div>
                         </Space>
-                    </Flex>
-                    { (getUser() && getUser()?.shelter_id !== data?.Shelter_id) &&
-                        <Flex gap="middle">
-                            <Button 
-                                icon={<ShoppingCartOutlined /> } 
-                                type="primary" 
-                                loading={loadingSubmit}
-                                onClick={addToCart}
-                            >
-                                Add To Cart
-                            </Button>
-                            <Button 
-                                icon={<SendOutlined /> } 
-                                type="primary" 
-                                loading={loadingSubmit}
-                                onClick={checkout}
-                                style={{ background: '#87d068' }}
-                            >
-                                Order now
-                            </Button>
-                        </Flex>
-                    }
-                </Card>
-                <Card>
-                    <Space direction="vertical" size="middle" style={{ display: 'flex', marginTop: '10px', marginBottom: '10px' }}>
-                        <Typography.Title level={4}>Shalter Information</Typography.Title>
-                        <Row>
-                            <Col span={3}>
-                                <Typography.Text>Name   :</Typography.Text>
-                            </Col>
-                            <Col>
-                                <Typography.Link strong onClick={() => { navigate('/animal/shelter/'+data?.Shelter_id) }}>{data?.Shelter_name}</Typography.Link>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col span={3}>
-                                <Typography.Text>Address   :</Typography.Text>
-                            </Col>
-                            <Col>
-                                <Typography.Text strong>{data?.Shelter_Address}</Typography.Text>
-                            </Col>
-                        </Row>
-                    </Space>
-                </Card>
-                    
-            </Space>
-        </Spin>
+                    </Card>
+                        
+                </Space>
+            </Spin>
+        </Container>
     )
 }

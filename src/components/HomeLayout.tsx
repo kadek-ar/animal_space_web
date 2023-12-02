@@ -69,14 +69,20 @@ function HomeLayout() {
                 >
                     <Container >
                         <Flex gap="small" justify="space-between" align="center">
-                            <Typography.Title 
-                                style={{ marginBottom: 0, color: "#fff" }} 
-                                level={1}
-                                onClick={() => navigate('/')}
-                                className="only-on-desktop"
-                            >
-                                Animal Space
-                            </Typography.Title>
+                            <div className="only-on-desktop">
+                                <Flex gap="middle" align="center">
+                                    <div className="logo-animal-space">
+                                        <img style={{ width: '100%' }} src="/src/assets/logo.png" alt="logo" />
+                                    </div>
+                                    <Typography.Title 
+                                        style={{ marginBottom: 0, color: "#fff", fontFamily: 'sans-serif' }} 
+                                        level={1}
+                                        onClick={() => navigate('/')}
+                                    >
+                                        Animal Space
+                                    </Typography.Title>
+                                </Flex>
+                            </div>
                             <Input.Search
                                 prefix={<SearchOutlined />}
                                 placeholder="input search text"
@@ -100,15 +106,13 @@ function HomeLayout() {
                         </Flex>
                     </Container>
                 </Header>
-                <Container>
-                    <Content
-                        style={{
-                            minHeight: '100vh'
-                        }}
-                    >
-                        <Outlet />
-                    </Content>
-                </Container>
+                <Content
+                    style={{
+                        minHeight: '100vh'
+                    }}
+                >
+                    <Outlet />
+                </Content>
                 <Footer>
                     <Container>
                         <Flex justify="center">
