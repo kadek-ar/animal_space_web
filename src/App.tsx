@@ -48,6 +48,7 @@ function App() {
       return tmp
   }
 
+
   return (
     <Routes>
       {/* <Route path='/' element={<Home />}></Route> */}
@@ -64,16 +65,14 @@ function App() {
         <Route path="animal/shelter/:id" element={<ShelterAnimal />}/>
         {/* <Route path="tasks" element={<DashboardTasks />} /> */}
       </Route>
-      { getUser()?.role === "admin" &&
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="home" element={<AdminHome />} />
-          <Route path="category" element={<CreateCatogories />} />
-          <Route path="transaction" element={<AdminTransaction />} />
-          <Route path="transaction/detail/:shelter_id/:id" element={<AdminTransactionDetail />} />
-          <Route path="animal" element={<AdminAnimal />} />
-          <Route path="banner" element={<AdminBanner />} />
-        </Route>
-      }
+      <Route path="/admin" element={<AdminLayout />}>
+        <Route path="home" element={<AdminHome />} />
+        <Route path="category" element={<CreateCatogories />} />
+        <Route path="transaction" element={<AdminTransaction />} />
+        <Route path="transaction/detail/:shelter_id/:id" element={<AdminTransactionDetail />} />
+        <Route path="animal" element={<AdminAnimal />} />
+        <Route path="banner" element={<AdminBanner />} />
+      </Route>
       { getUser()?.shelter_id &&
         <Route path="/shelter" element={<ShelterLayout />}>
           <Route path="home" element={<ShelterHome />} />

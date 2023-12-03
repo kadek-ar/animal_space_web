@@ -1,6 +1,6 @@
 import { AppstoreOutlined, ArrowLeftOutlined, CloseOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ShoppingOutlined, UnorderedListOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import { Button, Drawer, Layout, Menu, theme } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const { Header, Content, Sider } = Layout
@@ -12,6 +12,21 @@ export default function AdminLayout() {
     const {
         token: { colorBgContainer },
     } = theme.useToken();
+
+    const getUser = () => {
+        const auth = window.localStorage.getItem('user');
+        if (!auth) {
+            return null
+        }
+        const tmp = JSON.parse(auth)
+        return tmp
+    }
+
+    useEffect(() => {
+        if(getUser()?.role !== "admin"){
+            navigate("*")
+        }
+    },[getUser])
 
     return (
         <Layout
