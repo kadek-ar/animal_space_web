@@ -199,6 +199,11 @@ export default function Home() {
                     </Carousel>
                 </Container>
             </div>
+            <div className="section-logo">
+                <div className="logo-animal-space-home">
+                    <img style={{ width: '100%' }} src="/src/assets/logo.png" alt="logo" />
+                </div>
+            </div>
             <div className="section-info">
                 <Container>
                     <div className="info-grid">
