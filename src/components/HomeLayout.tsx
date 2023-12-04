@@ -93,8 +93,12 @@ function HomeLayout() {
                                 className="input-search-home"
                             />
                             <Flex gap="large" wrap="wrap">
-                                <ShoppingCartOutlined style={{color: '#fff'}} onClick={() => navigate('/cart')} />
-                                <ShoppingOutlined style={{color: '#fff'}} onClick={() => navigate('/transaction')} />
+                                { getUser() &&
+                                    <>
+                                        <ShoppingCartOutlined style={{color: '#fff'}} onClick={() => navigate('/cart')} />
+                                        <ShoppingOutlined style={{color: '#fff'}} onClick={() => navigate('/transaction')} />
+                                    </>
+                                }
                                 <Dropdown menu={{ items }}>
                                     <a onClick={(e) => e.preventDefault()}>
                                         <Space style={{color: '#fff'}}>
