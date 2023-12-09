@@ -1,10 +1,10 @@
 import './App.css'
-import { Routes, Route, useNavigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 // import { Container } from 'react-bootstrap'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import AdminLayout from './components/AdminLayout'
 import AdminHome from './pages/admin/AdminHome'
 import HomeLayout from './components/HomeLayout'
