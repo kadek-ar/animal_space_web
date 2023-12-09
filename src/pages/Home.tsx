@@ -251,8 +251,7 @@ export default function Home() {
                         <Flex className="animal-list" gap="middle" justify="center" align="center">
                             <Typography.Title level={2} style={{ fontFamily: 'Montserrat', color: '#0174BE', marginBottom: 0 }} >Animals For You</Typography.Title>
                             <div className="animal-list-img" >
-                                {/* <img style={{ width: '100%' }} src="src/assets/undraw_dog_walking_re_l61p.svg" alt="logo_space" /> */}
-                                <ReactSVG className="svg-component" src="src/assets/undraw_dog_walking_re_l61p.svg" />
+                                <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/krktkcWxBexXnybCkkjCundraw_dog_walking_re_l61p.svg" alt="logo_space" />
                             </div>
                         </Flex>
                         <br />

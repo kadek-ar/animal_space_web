@@ -72,7 +72,7 @@ function HomeLayout() {
                             <div className="only-on-desktop">
                                 <Flex gap="middle" align="center">
                                     <div className="logo-animal-space">
-                                        <img style={{ width: '100%' }} src="/src/assets/logo.png" alt="logo" />
+                                        <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/ufxhsmkLSKHLSIbbdjaHlogo.png" alt="logo" />
                                     </div>
                                     <Typography.Title 
                                         style={{ marginBottom: 0, color: "#fff", fontFamily: 'sans-serif' }} 
