@@ -3,6 +3,7 @@ import { api } from "../utillities/api";
 import { useNavigate } from "react-router-dom";
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { Container } from "react-bootstrap";
+import { useState } from "react";
 
 const { confirm } = Modal;
 
@@ -32,7 +33,9 @@ const getUser = async (navigate: Function) => {
 
 export default function Login() {
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
     const onFinish = async (val: any) => {
+        setLoading(true)
         await api.post('/login', val).then((res) => {
             storeToken(res)
             getUser(navigate);
@@ -42,12 +45,17 @@ export default function Login() {
                 icon: <CloseCircleOutlined />,
                 content: `${(err?.response?.data?.error)}`,
             });
+        }).finally(() => {
+            setLoading(false)
         })
     }
 
     return (
-        <Container className="login-container">
-            <Card className="box-shadow" style={{ marginTop: '60px', marginLeft: 'auto', marginRight: 'auto', maxWidth: '400px' }}>
+        <div style={{ background: '#0174BE', height: '100vh', position: 'relative', top: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Card className="box-shadow" style={{ marginLeft: 'auto', marginRight: 'auto', maxWidth: '400px' }}>
+                <div style={{ maxWidth: '100px', margin: 'auto' }}>
+                    <img style={{ width: '100%' }} src="/src/assets/logo.png" alt="logo" />
+                </div>
                 <Flex justify="center">
                     <Typography.Title level={3}>Login</Typography.Title>
                 </Flex>
@@ -81,16 +89,16 @@ export default function Login() {
                         </Button>
                     </Flex>
                     <br />
-                    <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Button type="primary" htmlType="submit" >
-                            Submit
-                        </Button>
-                    </Form.Item>
+                    <Button type="primary" htmlType="submit" loading={loading} block >
+                        Login
+                    </Button>
+                    <br />
+                    <br />
                     <Flex justify="center">
                         <Button type="link" onClick={() => navigate('/register')}>Dont't have account? register here</Button>
                     </Flex>
                 </Form>
             </Card>
-        </Container>
+        </div>
     )
 }

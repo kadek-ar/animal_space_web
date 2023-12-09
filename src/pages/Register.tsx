@@ -9,6 +9,14 @@ function Register() {
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const onFinish = (value: any) => {
+        if( value?.password != value?.re_password){
+            Modal.confirm({
+                title: 'Password not match',
+                icon: <CloseCircleOutlined />,
+                content: "both password is not match",
+            });
+            return
+        }
         setLoading(true)
         api.post('/signup', value).then(() => {
             navigate('/success-signup')
@@ -24,7 +32,7 @@ function Register() {
     }
 
     return (
-        <Container>
+        <div style={{ background: '#0174BE', height: '100vh', position: 'relative', top: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Card className="box-shadow" style={{ marginTop: '60px', marginLeft: 'auto', marginRight: 'auto', maxWidth: '400px' }}>
                 <Flex justify="center">
                     <Typography.Title level={3}>Register</Typography.Title>
@@ -58,7 +66,15 @@ function Register() {
                     >
                         <Input.Password />
                     </Form.Item>
-
+                    <Form.Item
+                        label="Re-type password"
+                        name={['re_password']}
+                        rules={[{ required: true, message: 're-type your password!' }]}
+                        style={{ marginBottom: 0 }}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+                    <br />
                     <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
                         <Button type="primary" htmlType="submit" loading={loading}>
                             Submit
@@ -69,7 +85,7 @@ function Register() {
                     </Flex>
                 </Form>
             </Card>
-        </Container>
+        </div>
     )
 }
 
