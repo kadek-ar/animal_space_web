@@ -1,4 +1,4 @@
-import { Button, Card, Carousel, Col, Divider, Flex, Modal, Row, Space, Spin, Tag, Typography } from "antd";
+import { Button, Card, Carousel, Col, Flex, Modal, Row, Space, Spin, Tag, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import { api, fetcher } from "../utillities/api";
@@ -13,7 +13,7 @@ export default function Home() {
     const [loading, setLoading] = useState(false)
     const [category, setCategory] = useState<any>()
     // const { data, isLoading } = useSWR(`/animal-space`, fetcher);
-    const { data: dataBanner, mutate: mutateBanner, isLoading: isLoadingBanner } = useSWR('/admin/banner', fetcher);
+    const { data: dataBanner } = useSWR('/admin/banner', fetcher);
 
     const getCategory = useCallback(() => {
         setLoading(true)
@@ -57,24 +57,6 @@ export default function Home() {
         }
         const tmp = JSON.parse(auth)
         return tmp
-    }
-
-    const contentStyle: React.CSSProperties = {
-        height: '360px',
-        color: '#fff',
-        lineHeight: '160px',
-        textAlign: 'center',
-        background: '#364d79',
-    };
-
-    const CategoriesStyle = {
-        borderRadius: '82%',
-        overflow: 'hidden',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '200px',
-        height: '200px'
     }
 
     const ButtonCreateShelter = () => {

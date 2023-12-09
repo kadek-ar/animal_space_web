@@ -1,8 +1,7 @@
-import { Button, Card, Divider, Flex, Form, InputNumber, Modal, Select, Space, Spin, Tag, Typography } from "antd";
-import { useCallback, useEffect, useState } from "react";
-import { CloseCircleOutlined, EnvironmentOutlined, PhoneOutlined, ShopOutlined } from "@ant-design/icons";
+import { Card, Flex, Space, Spin, Tag, Typography } from "antd";
+import { EnvironmentOutlined, PhoneOutlined, ShopOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
-import { api, fetcher } from "../../utillities/api";
+import { fetcher } from "../../utillities/api";
 import useSWR from "swr";
 import { Container } from "react-bootstrap";
 
