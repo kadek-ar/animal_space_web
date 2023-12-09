@@ -1,9 +1,9 @@
-import { ArrowLeftOutlined, HomeOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ShoppingOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, HomeOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ShoppingOutlined } from "@ant-design/icons";
 import { Breadcrumb, Button, Divider, Drawer, Layout, Menu, Typography, theme } from "antd";
 import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const { Header, Content, Sider } = Layout
+const { Content, Sider } = Layout
 
 
 export default function ShelterLayout() {

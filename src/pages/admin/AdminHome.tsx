@@ -2,7 +2,7 @@ import { Button, Card, Col, Divider, Flex, Modal, Row, Space, Table, Typography 
 import { ColumnsType } from "antd/es/table";
 import { useCallback, useEffect, useState } from "react";
 import { api } from "../../utillities/api";
-import { CheckOutlined, CloseCircleOutlined, CloseOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { CheckOutlined, CloseCircleOutlined, CloseOutlined } from "@ant-design/icons";
 
 export default function AdminHome() {
     const [data, setData] = useState<any>()

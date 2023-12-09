@@ -1,15 +1,15 @@
-import { CheckOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined, InboxOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import { Button, Card, Divider, Flex, Form, Input, Modal, Space, Spin, Table, Typography, Upload, UploadProps, message } from "antd";
+import { CheckOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined,InfoCircleOutlined } from "@ant-design/icons";
+import { Button, Card, Divider, Flex, Form, Input, Modal, Space, Spin, Table, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { api, fetcher } from "../../utillities/api";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import UploadImage from "../../components/UploadImage";
 import useSWR from "swr";
 
 
 
 export default function CreateCatogories() {
-    const [loadingEdit, setLoadingEdit] = useState(false);
+    const [loadingEdit,] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isEdit, setIsEdit] = useState<any>();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,7 +63,7 @@ export default function CreateCatogories() {
         {
             title: 'No.',
             key: 'name',
-            render: (_: any, rec: any, idx: any) => {
+            render: (_: any, __: any, idx: any) => {
                 return <div>{idx + 1}</div>
             }
         },

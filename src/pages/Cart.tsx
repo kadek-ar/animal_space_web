@@ -1,4 +1,4 @@
-import { CheckOutlined, CloseCircleOutlined, DeleteOutlined, InfoCircleOutlined, ShoppingOutlined } from "@ant-design/icons";
+import { CheckOutlined, CloseCircleOutlined, DeleteOutlined, ShoppingOutlined } from "@ant-design/icons";
 import { Button, Card, Divider, Flex, Modal, Result, Space, Spin, Typography, message } from "antd";
 import useSWR from "swr";
 import { api, fetcher } from "../utillities/api";

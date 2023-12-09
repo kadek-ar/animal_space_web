@@ -1,9 +1,9 @@
-import { AppstoreOutlined, ArrowLeftOutlined, CloseOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ShoppingOutlined, UnorderedListOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import { AppstoreOutlined, ArrowLeftOutlined, CloseOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ShoppingOutlined, UnorderedListOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import { Button, Drawer, Layout, Menu, theme } from "antd";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
-const { Header, Content, Sider } = Layout
+const { Content, Sider } = Layout
 
 
 export default function AdminLayout() {

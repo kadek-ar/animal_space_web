@@ -1,4 +1,4 @@
-import { CheckOutlined, CloseCircleOutlined, DeleteOutlined, EditOutlined, InfoCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { CheckOutlined, CloseCircleOutlined, DeleteOutlined, InfoCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Card, Divider, Flex, Form, Modal, Space, Spin, Typography } from "antd";
 import UploadImage from "../../components/UploadImage";
 import { useState } from "react";
@@ -8,8 +8,8 @@ import useSWR from "swr";
 export default function AdminBanner() {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
-    const [isEdit, setIsEdit] = useState<any>();
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [, setIsEdit] = useState<any>();
+    const [, setIsModalOpen] = useState(false);
 
     const { data, mutate, isLoading } = useSWR('/admin/banner', fetcher);
 

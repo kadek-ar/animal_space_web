@@ -9,7 +9,7 @@ export default function EditShelter() {
     const navigate = useNavigate()
     const [form] = Form.useForm() 
     const [loading, setLoading] = useState(false)
-    const [data, setData] = useState<any>()
+    const [, setData] = useState<any>()
 
     const getUser = () => {
         const auth = window.localStorage.getItem('user');

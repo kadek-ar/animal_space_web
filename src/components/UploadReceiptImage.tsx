@@ -1,4 +1,4 @@
-import { Form, FormInstance, Input, Spin, Upload, UploadProps, message } from "antd";
+import { Form, Spin, Upload, UploadProps, message } from "antd";
 import { useState } from "react";
 import { api } from "../utillities/api";
 import { InboxOutlined } from "@ant-design/icons";
@@ -6,17 +6,17 @@ import { InboxOutlined } from "@ant-design/icons";
 const { Dragger } = Upload;
 
 export default function UploadReceiptImage({
-    formName,
-    form,
-    formLabel,
+    // formName,
+    // form,
+    // formLabel,
     setList,
     list,
     index,
     uploadDisable
 }: {
-    formName?: string;
-    form: FormInstance;
-    formLabel?: string;
+    // formName?: string;
+    // form: FormInstance;
+    // formLabel?: string;
     setList: Function;
     list: any[];
     index: number;

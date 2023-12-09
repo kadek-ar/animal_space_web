@@ -1,44 +1,44 @@
-import { Alert, Button, Card, Col, Divider, Flex, Form, Modal, Row, Space, Spin, Tag, Typography } from "antd"
+import { Alert, Card, Col, Divider, Flex, Row, Space, Spin, Tag, Typography } from "antd"
 import { useParams } from "react-router-dom"
 import useSWR from "swr";
-import { api, fetcher } from "../utillities/api";
-import { CheckOutlined, CloseCircleOutlined, PhoneOutlined, ShopOutlined } from "@ant-design/icons";
-import UploadReceiptImage from "../components/UploadReceiptImage";
+import { fetcher } from "../utillities/api";
+import { PhoneOutlined, ShopOutlined } from "@ant-design/icons";
+// import UploadReceiptImage from "../components/UploadReceiptImage";
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 
 export default function TransactionDetail() {
     const { id } = useParams()
-    const [form] = Form.useForm();
+    // const [form] = Form.useForm();
     const [list, setList] = useState<any>()
-    const [loading, setLoading] = useState<any>()
+    // const [, setLoading] = useState<any>()
 
-    const { data, isLoading, mutate } = useSWR(`/animal-space/transaction/` + id, fetcher);
+    const { data, isLoading } = useSWR(`/animal-space/transaction/` + id, fetcher);
 
     useEffect(() => {
         setList(data?.data)
     }, [setList, data?.data])
 
-    const sendImage = (idx: number) => {
-        const payload = list[idx]
-        setLoading(true)
-        api.post('/animal-space/transaction/receipt', payload).then(() => {
-            Modal.success({
-                title: 'Success',
-                icon: <CheckOutlined />,
-                content: `Success send receipt for ${payload.AnimalName}`,
-            });
-            mutate()
-        }).catch((err) => {
-            Modal.confirm({
-                title: 'Error to Register',
-                icon: <CloseCircleOutlined />,
-                content: `${err.toString()}`,
-            });
-        }).finally(() => {
-            setLoading(false)
-        })
-    }
+    // const sendImage = (idx: number) => {
+    //     const payload = list[idx]
+    //     setLoading(true)
+    //     api.post('/animal-space/transaction/receipt', payload).then(() => {
+    //         Modal.success({
+    //             title: 'Success',
+    //             icon: <CheckOutlined />,
+    //             content: `Success send receipt for ${payload.AnimalName}`,
+    //         });
+    //         mutate()
+    //     }).catch((err) => {
+    //         Modal.confirm({
+    //             title: 'Error to Register',
+    //             icon: <CloseCircleOutlined />,
+    //             content: `${err.toString()}`,
+    //         });
+    //     }).finally(() => {
+    //         setLoading(false)
+    //     })
+    // }
 
     const StatusTag = ({status}: {status: string}) => {
         if(status === "approve"){
@@ -68,7 +68,7 @@ export default function TransactionDetail() {
                 <br />
                 <Typography.Title level={4}>List of product</Typography.Title>
                 <Space direction="vertical" size="middle" style={{ display: 'flex' }}>
-                    {(list || []).map((item: any, idx: number) => (
+                    {(list || []).map((item: any, _: number) => (
                         <Card className="box-shadow">
                             <Flex gap="small" wrap="wrap" justify="space-between" align="center">
                                 <Typography.Title level={3}>{item.AnimalName}</Typography.Title>
