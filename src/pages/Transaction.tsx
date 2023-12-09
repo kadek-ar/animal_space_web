@@ -4,7 +4,7 @@ import { fetcher } from "../utillities/api";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import { ReactSVG } from "react-svg";
+// import { ReactSVG } from "react-svg";
 
 export default function Transaction() {
     const navigate = useNavigate()

@@ -1,6 +1,6 @@
 import { Button, Result } from "antd";
 import { useNavigate } from "react-router-dom";
-import { ReactSVG } from "react-svg";
+// import { ReactSVG } from "react-svg";
 
 export default function SuccessSignUp() {
     const navigate = useNavigate()
