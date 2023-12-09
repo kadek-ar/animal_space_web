@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import "@fontsource/montserrat"
 import { Container } from "react-bootstrap";
+import { ReactSVG } from "react-svg";
 
 export default function Home() {
     const navigate = useNavigate()
@@ -70,7 +71,8 @@ export default function Home() {
             return (
                 <div className="create-shelter">
                     <div className="image-home-create-shelter">
-                        <img style={{ width: '100%' }} src="src/assets/undraw_everyday_life_re_1lfb_(1).svg" alt="" />
+                        {/* <img style={{ width: '100%' }} src="src/assets/undraw_everyday_life_re_1lfb_(1).svg" alt="" /> */}
+                        <ReactSVG className="svg-component" src="src/assets/undraw_everyday_life_re_1lfb_(1).svg" />
                     </div>
                     <div>
                         <div>
@@ -89,7 +91,8 @@ export default function Home() {
             return (
                 <div className="create-shelter">
                     <div className="image-home-create-shelter">
-                        <img style={{ width: '100%' }} src="src/assets/undraw_wait_in_line_o2aq.svg" alt="" />
+                        {/* <img style={{ width: '100%' }} src="src/assets/undraw_wait_in_line_o2aq.svg" alt="" /> */}
+                        <ReactSVG className="svg-component" src="src/assets/undraw_wait_in_line_o2aq.svg" />
                     </div>
                     <div>
                         <div>
@@ -110,7 +113,8 @@ export default function Home() {
             return (
                 <div className="create-shelter">
                     <div className="image-home-create-shelter">
-                        <img style={{ width: '100%' }} src="src/assets/undraw_cancel_re_pkdm.svg" alt="" />
+                        {/* <img style={{ width: '100%' }} src="src/assets/undraw_cancel_re_pkdm.svg" alt="" /> */}
+                        <ReactSVG className="svg-component" src="src/assets/undraw_cancel_re_pkdm.svg" />
                     </div>
                     <div>
                         <div>
@@ -129,7 +133,8 @@ export default function Home() {
             return (
                 <div className="create-shelter">
                     <div className="image-home-create-shelter">
-                        <img style={{ width: '100%' }} src="src/assets/undraw_settings_tab_mgiw.svg" alt="" />
+                        {/* <img style={{ width: '100%' }} src="src/assets/undraw_settings_tab_mgiw.svg" alt="" /> */}
+                        <ReactSVG className="svg-component" src="src/assets/undraw_settings_tab_mgiw.svg" />
                     </div>
                     <div>
                         <div>
@@ -148,7 +153,8 @@ export default function Home() {
         return (
             <div className="create-shelter">
                 <div className="image-home-create-shelter">
-                    <img style={{ width: '100%' }} src="src/assets/undraw_friends_r511.svg" alt="" />
+                    {/* <img style={{ width: '100%' }} src="src/assets/undraw_friends_r511.svg" alt="" /> */}
+                    <ReactSVG className="svg-component" src="src/assets/undraw_friends_r511.svg" />
                 </div>
                 <div>
                     <div>
@@ -183,7 +189,7 @@ export default function Home() {
             </div>
             <div className="section-logo">
                 <div className="logo-animal-space-home">
-                    <img style={{ width: '100%' }} src="/src/assets/logo.png" alt="logo" />
+                    <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/ufxhsmkLSKHLSIbbdjaHlogo.png" alt="logo" />
                 </div>
             </div>
             <div className="section-info">
@@ -205,7 +211,8 @@ export default function Home() {
                             </p>
                         </div>
                         <div className="animal-info-img" >
-                            <img style={{ width: '100%' }} src="src/assets/undraw_good_doggy_re_eet7.svg" alt="" />
+                            {/* <img style={{ width: '100%' }} src="src/assets/undraw_good_doggy_re_eet7.svg" alt="" /> */}
+                            <ReactSVG className="svg-component" src="src/assets/undraw_good_doggy_re_eet7.svg" />
                         </div>
                     </div>
                 </Container>
@@ -244,7 +251,8 @@ export default function Home() {
                         <Flex className="animal-list" gap="middle" justify="center" align="center">
                             <Typography.Title level={2} style={{ fontFamily: 'Montserrat', color: '#0174BE', marginBottom: 0 }} >Animals For You</Typography.Title>
                             <div className="animal-list-img" >
-                                <img style={{ width: '100%' }} src="src/assets/undraw_dog_walking_re_l61p.svg" alt="logo_space" />
+                                {/* <img style={{ width: '100%' }} src="src/assets/undraw_dog_walking_re_l61p.svg" alt="logo_space" /> */}
+                                <ReactSVG className="svg-component" src="src/assets/undraw_dog_walking_re_l61p.svg" />
                             </div>
                         </Flex>
                         <br />
