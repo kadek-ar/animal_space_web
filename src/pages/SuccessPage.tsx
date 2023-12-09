@@ -2,7 +2,6 @@ import { Button, Result } from "antd";
 import { useNavigate } from "react-router-dom";
 
 export default function SuccessPage() {
-
     const navigate = useNavigate()
 
     return (

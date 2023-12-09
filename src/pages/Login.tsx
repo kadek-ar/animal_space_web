@@ -48,11 +48,9 @@ export default function Login() {
     return (
         <Container className="login-container">
             <Card className="box-shadow" style={{ marginTop: '60px', marginLeft: 'auto', marginRight: 'auto', maxWidth: '400px' }}>
-            <Flex justify="center">
-                <Typography.Title level={3}>Login</Typography.Title>
-            </Flex>
-            <Flex gap="small" wrap="wrap">
-            </Flex>
+                <Flex justify="center">
+                    <Typography.Title level={3}>Login</Typography.Title>
+                </Flex>
                 <Form
                     name="basic"
                     labelCol={{ span: 24 }}
@@ -73,12 +71,18 @@ export default function Login() {
                         label="Password"
                         name={['password']}
                         rules={[{ required: true, message: 'Please input your password!' }]}
+                        style={{ marginBottom: 0 }}
                     >
                         <Input.Password />
                     </Form.Item>
-
+                    <Flex justify="end">
+                        <Button type="link" onClick={() => navigate('/forget-password')} style={{ paddingRight: 0 }}>
+                            Forget your password?
+                        </Button>
+                    </Flex>
+                    <br />
                     <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" >
                             Submit
                         </Button>
                     </Form.Item>

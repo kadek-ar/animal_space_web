@@ -3,18 +3,23 @@ import { api } from "../utillities/api";
 import { Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { CloseCircleOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 function Register() {
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
     const onFinish = (value: any) => {
+        setLoading(true)
         api.post('/signup', value).then(() => {
-            navigate('/login')
+            navigate('/success-signup')
         }).catch((err) => {
             Modal.confirm({
                 title: 'Error to Register',
                 icon: <CloseCircleOutlined />,
-                content: `${err.toString()}`,
+                content: `${ err?.response?.data?.error || err.toString()}`,
             });
+        }).finally(() => {
+            setLoading(false)
         })
     }
 
@@ -55,7 +60,7 @@ function Register() {
                     </Form.Item>
 
                     <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="primary" htmlType="submit" loading={loading}>
                             Submit
                         </Button>
                     </Form.Item>

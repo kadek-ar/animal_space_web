@@ -27,6 +27,11 @@ import AdminAnimal from './pages/admin/AdminAnimal'
 import AdminBanner from './pages/admin/AdminBanner'
 import ShelterAnimal from './pages/shelter/ShelterAnimal'
 import NotFoundPage from './pages/NotFoundPage'
+import ForgotPassword from './pages/ForgotPassword'
+import SuccessSignUp from './pages/SuccessSignUp'
+import VerifyEmail from './pages/VerifyEmail'
+import SuccessSendResetPass from './pages/SuccessSendResetPass'
+import ResetPassword from './pages/ResetPassword'
 
 function App() {
   // const navigate = useNavigate()
@@ -82,6 +87,11 @@ function App() {
       }
       <Route path='/login' element={<Login />}></Route>
       <Route path='/register' element={<Register />}></Route>
+      <Route path='/forget-password' element={<ForgotPassword />}></Route>
+      <Route path='/success-signup' element={<SuccessSignUp />}></Route>
+      <Route path='/verify-email' element={<VerifyEmail />}></Route>
+      <Route path='/send-reset-pass' element={<SuccessSendResetPass />}></Route>
+      <Route path='/reset-password' element={<ResetPassword />}></Route>
       <Route path='*' element={<NotFoundPage />}></Route>
     </Routes>
   )
