@@ -26,8 +26,8 @@ export default function Transaction() {
                 icon={
                     <div style={{ display: 'flex', justifyContent: 'center'  }}>
                         <div style={{ width: '50vh'}}>
-                            {/* <img style={{ width: '100%' }} src="src/assets/undraw_selection_re_ycpo.svg" alt="cart_img" /> */}
-                            <ReactSVG className="svg-component" src="src/assets/undraw_selection_re_ycpo.svg" />
+                            <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/yAkxsUPlZfuhVmPgTorIundraw_selection_re_ycpo.png" alt="cart_img" />
+                            {/* <ReactSVG className="svg-component" src="src/assets/undraw_selection_re_ycpo.svg" /> */}
                         </div>
                     </div>
                 }

@@ -53,7 +53,7 @@ export default function Login() {
         <div style={{ background: '#0174BE', height: '100vh', position: 'relative', top: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Card className="box-shadow" style={{ marginLeft: 'auto', marginRight: 'auto', maxWidth: '400px' }}>
                 <div style={{ maxWidth: '100px', margin: 'auto' }}>
-                    <img style={{ width: '100%' }} src="/src/assets/logo.png" alt="logo" />
+                    <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/ufxhsmkLSKHLSIbbdjaHlogo.png" alt="logo" />
                 </div>
                 <Flex justify="center">
                     <Typography.Title level={3}>Login</Typography.Title>

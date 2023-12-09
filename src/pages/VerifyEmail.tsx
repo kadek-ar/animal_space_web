@@ -41,8 +41,8 @@ export default function VerifyEmail() {
                 icon={
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <div style={{ maxWidth: '200px' }}>
-                            {/* <img style={{ width: '100%' }} src="src/assets/undraw_done_re_oak4.svg" alt="email_send" /> */}
-                            <ReactSVG className="svg-component" src="src/assets/undraw_done_re_oak4.svg" />
+                            <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/UQsnSTGVMObrMMBIoYNrundraw_Done_re_oak4.png" alt="email_send" />
+                            {/* <ReactSVG className="svg-component" src="src/assets/undraw_done_re_oak4.svg" /> */}
                         </div>
                     </div>
                 }

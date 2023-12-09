@@ -114,7 +114,9 @@ button:focus-visible {
 }
 
 .animal-list-img{
-  width: 200px;
+  width: 180px;
+  border-radius: 84px;
+  overflow: hidden;
 }
 
 .section-list-animal{

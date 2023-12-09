@@ -73,8 +73,8 @@ export default function Cart() {
                 icon={
                     <div style={{ display: 'flex', justifyContent: 'center'  }}>
                         <div style={{ width: '50vh'}}>
-                            {/* <img style={{ width: '100%' }} src="src/assets/undraw_empty_cart_co35.svg" alt="cart_img" /> */}
-                            <ReactSVG className="svg-component" src="src/assets/undraw_empty_cart_co35.svg" />
+                            <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/CvpyogTlnEKniGDvtvsuundraw_empty_cart_co35.png" alt="cart_img" />
+                            {/* <ReactSVG className="svg-component" src="src/assets/undraw_empty_cart_co35.svg" /> */}
                         </div>
                     </div>
                 }
