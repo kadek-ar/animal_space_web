@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../utillities/api";
 import { CloseCircleOutlined } from "@ant-design/icons";
-import { ReactSVG } from "react-svg";
+// import { ReactSVG } from "react-svg";
 
 export default function VerifyEmail() {
     const params = new URLSearchParams(document.location.search)
