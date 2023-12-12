@@ -10,6 +10,7 @@ export default function VerifyEmail() {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
 
+
     const verifyEmail = useCallback(async() => {
         if(!params.get('idveas')){
             navigate('/login')
@@ -26,7 +27,9 @@ export default function VerifyEmail() {
     },[params])
 
     useEffect(() => {
-        verifyEmail()
+        if(loading){
+            verifyEmail()
+        }
     },[verifyEmail])
 
     if(loading){
