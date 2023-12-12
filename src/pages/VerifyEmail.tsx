@@ -33,9 +33,11 @@ export default function VerifyEmail() {
     },[verifyEmail])
 
     if(loading){
-        <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%'  }} >
-            <Spin spinning={loading} size="large" ></Spin>
-        </div>
+        return (
+            <div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%'  }} >
+                <Spin spinning={loading} size="large" ></Spin>
+            </div>
+        )
     }
 
     return (
