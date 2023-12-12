@@ -10,11 +10,11 @@ export default function VerifyEmail() {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(true)
 
-    const verifyEmail = useCallback(() => {
+    const verifyEmail = useCallback(async() => {
         if(!params.get('idveas')){
             navigate('/login')
         }
-        api.post('/verify?idveas=' + (params.get('idveas') || '')).then(() => {
+        await api.post('/verify?idveas=' + (params.get('idveas') || '')).then(() => {
             setLoading(false)
         }).catch((err) => {
             Modal.confirm({
