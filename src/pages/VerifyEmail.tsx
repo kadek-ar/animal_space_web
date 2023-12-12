@@ -8,13 +8,12 @@ import { CloseCircleOutlined } from "@ant-design/icons";
 export default function VerifyEmail() {
     const params = new URLSearchParams(document.location.search)
     const navigate = useNavigate()
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const verifyEmail = useCallback(() => {
         if(!params.get('idveas')){
             navigate('/login')
         }
-        setLoading(true)
         api.post('/verify?idveas=' + (params.get('idveas') || '')).then(() => {
             setLoading(false)
         }).catch((err) => {
