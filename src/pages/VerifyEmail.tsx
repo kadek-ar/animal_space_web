@@ -14,6 +14,7 @@ export default function VerifyEmail() {
         if(!params.get('idveas')){
             navigate('/login')
         }
+        setLoading(true)
         api.post('/verify?idveas=' + (params.get('idveas') || '')).then(() => {
             setLoading(false)
         }).catch((err) => {
