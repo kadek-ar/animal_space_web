@@ -96,6 +96,9 @@ export default function Login() {
                     <Flex justify="center">
                         <Button type="link" onClick={() => navigate('/register')}>Dont't have account? register here</Button>
                     </Flex>
+                    <Flex justify="center">
+                        <Button type="link" onClick={() => navigate('/create-shelter')}>Or Create your own shelter here</Button>
+                    </Flex>
                 </Form>
             </Card>
         </div>

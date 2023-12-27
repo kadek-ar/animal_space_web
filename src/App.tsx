@@ -32,6 +32,7 @@ import SuccessSignUp from './pages/SuccessSignUp'
 import VerifyEmail from './pages/VerifyEmail'
 import SuccessSendResetPass from './pages/SuccessSendResetPass'
 import ResetPassword from './pages/ResetPassword'
+import WaitingApprovalShelter from './pages/WaitingApprovalShelter'
 
 function App() {
   // const navigate = useNavigate()
@@ -49,7 +50,6 @@ function App() {
       {/* <Route path='/' element={<Home />}></Route> */}
       <Route path="/" element={<HomeLayout />}>
         <Route path="" element={<Home />}/>
-        <Route path="/create-shelter" element={<CreateShelter />}/>
         <Route path="edit-shelter" element={<EditShelter />}/>
         <Route path="search-animal" element={<SearchPage />}/>
         <Route path="detail-animal/:id" element={<DetailAnimal />}/>
@@ -75,11 +75,13 @@ function App() {
       </Route>
       <Route path='/login' element={<Login />}></Route>
       <Route path='/register' element={<Register />}></Route>
+      <Route path="/create-shelter" element={<CreateShelter />}/>
       <Route path='/forget-password' element={<ForgotPassword />}></Route>
       <Route path='/success-signup' element={<SuccessSignUp />}></Route>
       <Route path='/verify-email' element={<VerifyEmail />}></Route>
       <Route path='/send-reset-pass' element={<SuccessSendResetPass />}></Route>
       <Route path='/reset-password' element={<ResetPassword />}></Route>
+      <Route path='/waiting-approve-shelter' element={<WaitingApprovalShelter />}></Route>
       <Route path='*' element={<NotFoundPage />}></Route>
     </Routes>
   )

@@ -1,4 +1,4 @@
-import { Button, Card, Carousel, Col, Flex, Modal, Row, Space, Spin, Tag, Typography } from "antd";
+import { Card, Carousel, Col, Flex, Modal, Row, Space, Spin, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import useSWR from "swr";
 import { api, fetcher } from "../utillities/api";
@@ -59,96 +59,111 @@ export default function Home() {
         return tmp
     }
 
+    useEffect(() => {
+        if(getUser()?.shelter_status === 'pending'){
+            navigate('/waiting-approve-shelter')
+        }
+
+        if(getUser()?.shelter_id){
+            navigate('/shelter/home')
+        }
+
+        if(getUser()?.role === 'admin'){
+            navigate('/admin/home')
+        }
+
+    }, [navigate])
+
     const ButtonCreateShelter = () => {
-        const user = getUser()
+        // const user = getUser()
 
-        if (!getUser()) {
-            return null
-        }
+        // if (!getUser()) {
+        //     return null
+        // }
 
-        if (user?.shelter_status === 'approve') {
-            return (
-                <div className="create-shelter">
-                    <div className="image-home-create-shelter">
-                        <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/ipJznhWcLexbgymsFkwFundraw_Everyday_life_re_1lfb.png" alt="" />
-                        {/* <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/ipJznhWcLexbgymsFkwFundraw_Everyday_life_re_1lfb.png" /> */}
-                    </div>
-                    <div>
-                        <div>
-                            <div className="title-create-shelter">
-                                Manage Your shelter
-                            </div>
-                            <p>Add more animal to your shelter or manage you transaction of your animal </p>
-                            <Button type="primary" onClick={() => navigate('/shelter/home')} style={{ background: '#0174BE' }}>
-                                Go to your shelter page
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            )
-        } else if (user?.shelter_status === 'pending') {
-            return (
-                <div className="create-shelter">
-                    <div className="image-home-create-shelter">
-                        <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/hhPOfLJnOolJJxSRDyBAundraw_wait_in_line_o2aq.png" alt="" />
-                        {/* <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/hhPOfLJnOolJJxSRDyBAundraw_wait_in_line_o2aq.png" /> */}
-                    </div>
-                    <div>
-                        <div>
-                            <div className="title-create-shelter">
-                                Waiting to approve admin
-                            </div>
-                            <p>Your shelter will be see by Animal Space admin and make approval for it</p>
-                            <Tag
-                                color="blue"
-                            >
-                                Waiting shelter approval from admin
-                            </Tag>
-                        </div>
-                    </div>
-                </div>
-            )
-        } else if (user?.shelter_status === 'reject') {
-            return (
-                <div className="create-shelter">
-                    <div className="image-home-create-shelter">
-                        <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/cTwfQpSEymtadTaOIKrmundraw_Cancel_re_pkdm.png" alt="" />
-                        {/* <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/cTwfQpSEymtadTaOIKrmundraw_Cancel_re_pkdm.png" /> */}
-                    </div>
-                    <div>
-                        <div>
-                            <div className="title-create-shelter">
-                                Your shelter has been reject
-                            </div>
-                            <p>Some your shelter information is not correct, make sure your information that you give is correct</p>
-                            <Button type="primary" onClick={() => navigate('/edit-shelter')} style={{ background: '#0174BE' }}>
-                                Edit Your Shelter
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            )
-        } else if (user?.role === "admin") {
-            return (
-                <div className="create-shelter">
-                    <div className="image-home-create-shelter">
-                        <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/LhgWuSaSpJWLJbInEpodundraw_settings_tab_mgiw.png" alt="" />
-                        {/* <ReactSVG className="svg-component" src="src/assets/undraw_settings_tab_mgiw.svg" /> */}
-                    </div>
-                    <div>
-                        <div>
-                            <div className="title-create-shelter">
-                                Admin Page Here
-                            </div>
-                            <p>Setting or manage transaction, shelter or animal in this website</p>
-                            <Button type="primary" onClick={() => navigate('/admin/home')} style={{ background: '#0174BE' }}>
-                                Go to Admin page
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            )
-        }
+        // if (user?.shelter_status === 'approve') {
+        //     return (
+        //         <div className="create-shelter">
+        //             <div className="image-home-create-shelter">
+        //                 <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/ipJznhWcLexbgymsFkwFundraw_Everyday_life_re_1lfb.png" alt="" />
+        //                 {/* <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/ipJznhWcLexbgymsFkwFundraw_Everyday_life_re_1lfb.png" /> */}
+        //             </div>
+        //             <div>
+        //                 <div>
+        //                     <div className="title-create-shelter">
+        //                         Manage Your shelter
+        //                     </div>
+        //                     <p>Add more animal to your shelter or manage you transaction of your animal </p>
+        //                     <Button type="primary" onClick={() => navigate('/shelter/home')} style={{ background: '#0174BE' }}>
+        //                         Go to your shelter page
+        //                     </Button>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     )
+        // } else if (user?.shelter_status === 'pending') {
+        //     return (
+        //         <div className="create-shelter">
+        //             <div className="image-home-create-shelter">
+        //                 <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/hhPOfLJnOolJJxSRDyBAundraw_wait_in_line_o2aq.png" alt="" />
+        //                 {/* <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/hhPOfLJnOolJJxSRDyBAundraw_wait_in_line_o2aq.png" /> */}
+        //             </div>
+        //             <div>
+        //                 <div>
+        //                     <div className="title-create-shelter">
+        //                         Waiting to approve admin
+        //                     </div>
+        //                     <p>Your shelter will be see by Animal Space admin and make approval for it</p>
+        //                     <Tag
+        //                         color="blue"
+        //                     >
+        //                         Waiting shelter approval from admin
+        //                     </Tag>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     )
+        // } else if (user?.shelter_status === 'reject') {
+        //     return (
+        //         <div className="create-shelter">
+        //             <div className="image-home-create-shelter">
+        //                 <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/cTwfQpSEymtadTaOIKrmundraw_Cancel_re_pkdm.png" alt="" />
+        //                 {/* <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/cTwfQpSEymtadTaOIKrmundraw_Cancel_re_pkdm.png" /> */}
+        //             </div>
+        //             <div>
+        //                 <div>
+        //                     <div className="title-create-shelter">
+        //                         Your shelter has been reject
+        //                     </div>
+        //                     <p>Some your shelter information is not correct, make sure your information that you give is correct</p>
+        //                     <Button type="primary" onClick={() => navigate('/edit-shelter')} style={{ background: '#0174BE' }}>
+        //                         Edit Your Shelter
+        //                     </Button>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     )
+        // } else if (user?.role === "admin") {
+        //     return (
+        //         <div className="create-shelter">
+        //             <div className="image-home-create-shelter">
+        //                 <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/LhgWuSaSpJWLJbInEpodundraw_settings_tab_mgiw.png" alt="" />
+        //                 {/* <ReactSVG className="svg-component" src="src/assets/undraw_settings_tab_mgiw.svg" /> */}
+        //             </div>
+        //             <div>
+        //                 <div>
+        //                     <div className="title-create-shelter">
+        //                         Admin Page Here
+        //                     </div>
+        //                     <p>Setting or manage transaction, shelter or animal in this website</p>
+        //                     <Button type="primary" onClick={() => navigate('/admin/home')} style={{ background: '#0174BE' }}>
+        //                         Go to Admin page
+        //                     </Button>
+        //                 </div>
+        //             </div>
+        //         </div>
+        //     )
+        // }
         return (
             <div className="create-shelter">
                 <div className="image-home-create-shelter">
@@ -158,12 +173,12 @@ export default function Home() {
                 <div>
                     <div>
                         <div className="title-create-shelter">
-                            Make Your Own Shelter
+                            Get your own pet
                         </div>
-                        <p>Give the animal home, easy to create new shelter, just need approval from Animal Space admin</p>
-                        <Button type="primary" onClick={() => navigate('/create-shelter')} style={{ background: '#0174BE' }}>
+                        <p>Give the animal home to stay, make them comfort with become your friends</p>
+                        {/* <Button type="primary" onClick={() => navigate('/create-shelter')} style={{ background: '#0174BE' }}>
                             Create Shelter Here
-                        </Button>
+                        </Button> */}
                     </div>
                 </div>
             </div>

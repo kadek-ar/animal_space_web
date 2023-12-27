@@ -1,4 +1,4 @@
-import { AppstoreOutlined, ArrowLeftOutlined, CloseOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ShoppingOutlined, UnorderedListOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
+import { AppstoreOutlined, CloseOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ShoppingOutlined, UnorderedListOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import { Button, Drawer, Layout, Menu, theme } from "antd";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -76,12 +76,12 @@ export default function AdminLayout() {
                             label: 'Slide Show Banner',
                             onClick: () => {navigate('/admin/banner'); setCollapsed(false)}
                         },
-                        {
-                            key: '6',
-                            icon: <ArrowLeftOutlined />,
-                            label: 'Animal Shelter',
-                            onClick: () => {navigate('/'); setCollapsed(false)}
-                        },
+                        // {
+                        //     key: '6',
+                        //     icon: <ArrowLeftOutlined />,
+                        //     label: 'Animal Shelter',
+                        //     onClick: () => {navigate('/'); setCollapsed(false)}
+                        // },
                         {
                             key: '7',
                             icon: <LogoutOutlined />,
@@ -131,12 +131,12 @@ export default function AdminLayout() {
                             label: 'Slide Show Banner',
                             onClick: () => navigate('/admin/banner')
                         },
-                        {
-                            key: '6',
-                            icon: <ArrowLeftOutlined />,
-                            label: 'Animal Shelter',
-                            onClick: () => navigate('/')
-                        },
+                        // {
+                        //     key: '6',
+                        //     icon: <ArrowLeftOutlined />,
+                        //     label: 'Animal Shelter',
+                        //     onClick: () => navigate('/')
+                        // },
                         {
                             key: '7',
                             icon: <LogoutOutlined />,
