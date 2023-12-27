@@ -6,7 +6,6 @@ import { useCallback, useEffect, useState } from "react";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import "@fontsource/montserrat"
 import { Container } from "react-bootstrap";
-import { ReactSVG } from "react-svg";
 
 export default function Home() {
     const navigate = useNavigate()
