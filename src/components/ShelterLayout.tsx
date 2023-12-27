@@ -1,6 +1,6 @@
 import { ArrowLeftOutlined, HomeOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ShoppingOutlined } from "@ant-design/icons";
 import { Breadcrumb, Button, Divider, Drawer, Layout, Menu, Typography, theme } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const { Content, Sider } = Layout
@@ -22,6 +22,21 @@ export default function ShelterLayout() {
         const tmp = JSON.parse(auth)
         return tmp.shelter_name
     }
+
+    const getShelterId = () => {
+        const auth = window.localStorage.getItem('user');
+        if (!auth) {
+            return null
+        }
+        const tmp = JSON.parse(auth)
+        return tmp.shelter_id
+    }
+
+    useEffect(() => {
+        if(!getShelterId()){
+            navigate('*')
+        }
+    }, [navigate])
 
     return (
         <Layout

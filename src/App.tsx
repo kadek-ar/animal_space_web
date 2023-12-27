@@ -44,16 +44,6 @@ function App() {
   //   }
   // }, [window.location.pathname])
 
-  const getUser = () => {
-      const auth = window.localStorage.getItem('user');
-      if (!auth) {
-          return null
-      }
-      const tmp = JSON.parse(auth)
-      return tmp
-  }
-
-
   return (
     <Routes>
       {/* <Route path='/' element={<Home />}></Route> */}
@@ -78,13 +68,11 @@ function App() {
         <Route path="animal" element={<AdminAnimal />} />
         <Route path="banner" element={<AdminBanner />} />
       </Route>
-      { getUser()?.shelter_id &&
-        <Route path="/shelter" element={<ShelterLayout />}>
-          <Route path="home" element={<ShelterHome />} />
-          <Route path="transaction" element={<ShelterTransaction />} />
-          <Route path="transaction/detail/:id" element={<ShelterTransactionDetail />} />
-        </Route>
-      }
+      <Route path="/shelter" element={<ShelterLayout />}>
+        <Route path="home" element={<ShelterHome />} />
+        <Route path="transaction" element={<ShelterTransaction />} />
+        <Route path="transaction/detail/:id" element={<ShelterTransactionDetail />} />
+      </Route>
       <Route path='/login' element={<Login />}></Route>
       <Route path='/register' element={<Register />}></Route>
       <Route path='/forget-password' element={<ForgotPassword />}></Route>

@@ -71,8 +71,8 @@ export default function Home() {
             return (
                 <div className="create-shelter">
                     <div className="image-home-create-shelter">
-                        {/* <img style={{ width: '100%' }} src="src/assets/undraw_everyday_life_re_1lfb_(1).svg" alt="" /> */}
-                        <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/ipJznhWcLexbgymsFkwFundraw_Everyday_life_re_1lfb.png" />
+                        <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/ipJznhWcLexbgymsFkwFundraw_Everyday_life_re_1lfb.png" alt="" />
+                        {/* <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/ipJznhWcLexbgymsFkwFundraw_Everyday_life_re_1lfb.png" /> */}
                     </div>
                     <div>
                         <div>
@@ -91,8 +91,8 @@ export default function Home() {
             return (
                 <div className="create-shelter">
                     <div className="image-home-create-shelter">
-                        {/* <img style={{ width: '100%' }} src="src/assets/undraw_wait_in_line_o2aq.svg" alt="" /> */}
-                        <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/hhPOfLJnOolJJxSRDyBAundraw_wait_in_line_o2aq.png" />
+                        <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/hhPOfLJnOolJJxSRDyBAundraw_wait_in_line_o2aq.png" alt="" />
+                        {/* <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/hhPOfLJnOolJJxSRDyBAundraw_wait_in_line_o2aq.png" /> */}
                     </div>
                     <div>
                         <div>
@@ -113,8 +113,8 @@ export default function Home() {
             return (
                 <div className="create-shelter">
                     <div className="image-home-create-shelter">
-                        {/* <img style={{ width: '100%' }} src="src/assets/undraw_cancel_re_pkdm.svg" alt="" /> */}
-                        <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/cTwfQpSEymtadTaOIKrmundraw_Cancel_re_pkdm.png" />
+                        <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/cTwfQpSEymtadTaOIKrmundraw_Cancel_re_pkdm.png" alt="" />
+                        {/* <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/cTwfQpSEymtadTaOIKrmundraw_Cancel_re_pkdm.png" /> */}
                     </div>
                     <div>
                         <div>
@@ -153,8 +153,8 @@ export default function Home() {
         return (
             <div className="create-shelter">
                 <div className="image-home-create-shelter">
-                    {/* <img style={{ width: '100%' }} src="src/assets/undraw_friends_r511.svg" alt="" /> */}
-                    <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/fkEQZUKMuMbTCXKPBNJrundraw_friends_r511.png" />
+                    <img style={{ width: '100%' }} src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/fkEQZUKMuMbTCXKPBNJrundraw_friends_r511.png" alt="" />
+                    {/* <ReactSVG className="svg-component" src="https://animal-space-img.s3.ap-southeast-1.amazonaws.com/fkEQZUKMuMbTCXKPBNJrundraw_friends_r511.png" /> */}
                 </div>
                 <div>
                     <div>
