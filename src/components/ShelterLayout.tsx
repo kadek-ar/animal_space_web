@@ -1,4 +1,4 @@
-import { HomeOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ShoppingOutlined } from "@ant-design/icons";
+import { HomeOutlined, LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, SettingOutlined, ShoppingOutlined } from "@ant-design/icons";
 import { Breadcrumb, Button, Divider, Drawer, Layout, Menu, Typography, theme } from "antd";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -67,6 +67,12 @@ export default function ShelterLayout() {
                             label: 'Transaction',
                             onClick: () => {navigate('/shelter/transaction'); setCollapsed(false)}
                         },
+                        {
+                            key: '3',
+                            icon: <SettingOutlined />,
+                            label: 'Setting',
+                            onClick: () => {navigate('/shelter/setting'); setCollapsed(false)}
+                        },
                         // {
                         //     key: '3',
                         //     icon: <ArrowLeftOutlined />,
@@ -107,6 +113,12 @@ export default function ShelterLayout() {
                             icon: <ShoppingOutlined />,
                             label: 'Transaction',
                             onClick: () => navigate('/shelter/transaction')
+                        },
+                        {
+                            key: '3',
+                            icon: <SettingOutlined />,
+                            label: 'Setting',
+                            onClick: () => navigate('/shelter/setting')
                         },
                         // {
                         //     key: '3',

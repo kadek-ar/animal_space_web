@@ -64,6 +64,10 @@ export default function Home() {
             navigate('/waiting-approve-shelter')
         }
 
+        if(getUser()?.shelter_status === 'reject'){
+            navigate('/edit-shelter')
+        }
+
         if(getUser()?.shelter_id){
             navigate('/shelter/home')
         }

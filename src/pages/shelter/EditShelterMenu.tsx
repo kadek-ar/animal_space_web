@@ -1,12 +1,13 @@
-import { Alert, Button, Card, Form, Input, Modal, Space, Spin, Typography } from "antd";
+import { Alert, Button, Card, Form, Input, Modal, Spin, Typography } from "antd";
+import { Container } from "react-bootstrap";
 import { api } from "../../utillities/api";
 import { CheckOutlined, CloseCircleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 
-export default function EditShelter() {
+export default function EditShelterMenu() {
     const navigate = useNavigate()
-    const [form] = Form.useForm()
+    const [form] = Form.useForm() 
     const [loading, setLoading] = useState(false)
     const [, setData] = useState<any>()
 
@@ -18,16 +19,15 @@ export default function EditShelter() {
         const tmp = JSON.parse(auth)
         return tmp
     }
-
+    
     const onFinish = (value: any) => {
-        api.put('/shelter/' + getUser().shelter_id, value).then(() => {
+        api.put('/shelter/'+getUser().shelter_id, {...value, direct_edit: true}).then(() => {
             Modal.success({
                 title: 'Success',
                 icon: <CheckOutlined />,
                 content: `Success edit shelter`,
-                onOk: () => navigate('/'),
-                onCancel: () => navigate('/')
             });
+            getData()
         }).catch((err) => {
             Modal.confirm({
                 title: 'Error to Register',
@@ -39,7 +39,7 @@ export default function EditShelter() {
 
     const getData = useCallback(() => {
         setLoading(true)
-        api.get('/shelter/' + getUser().shelter_id).then((res) => {
+        api.get('/shelter/'+getUser().shelter_id).then((res) => {
             setData(res?.data?.data || {})
             form.setFieldsValue(res?.data?.data || {})
         }).catch((err) => {
@@ -51,26 +51,19 @@ export default function EditShelter() {
         }).finally(() => {
             setLoading(false)
         })
-    }, [setLoading, setData])
+    },[setLoading, setData])
 
     useEffect(() => {
         getData()
     }, [getData])
 
-
+    
 
     return (
-        <div style={{ background: '#0174BE', height: '100vh', position: 'relative', top: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Container>
             <Spin spinning={loading}>
-                <Card className="box-shadow" style={{ marginTop: '60px', marginLeft: 'auto', marginRight: 'auto', maxWidth: '600px' }}>
+                <Card>
                     <Typography.Title level={3}>Edit Your Shelter</Typography.Title>
-                    <Alert
-                        style={{ color: '#91caff' }}
-                        message="Informational Notes"
-                        description="Your shelter has been rejected, edit your shelter infomation and submit again"
-                        type="info"
-                        showIcon
-                    />
                     <br />
                     <Form
                         name="basic"
@@ -111,22 +104,14 @@ export default function EditShelter() {
                             <Input.TextArea placeholder="write down your detail address" />
                         </Form.Item>
 
-                        <Space size="middle" style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
                             <Button type="primary" htmlType="submit">
                                 Submit
                             </Button>
-                            <Button type="primary" danger htmlType="submit"
-                                onClick={() => {
-                                    localStorage.clear()
-                                    navigate('/login')
-                                }}
-                            >
-                                Logout
-                            </Button>
-                        </Space>
+                        </Form.Item>
                     </Form>
                 </Card>
             </Spin>
-        </div>
+        </Container>
     )
 }

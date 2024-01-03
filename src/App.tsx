@@ -33,6 +33,7 @@ import VerifyEmail from './pages/VerifyEmail'
 import SuccessSendResetPass from './pages/SuccessSendResetPass'
 import ResetPassword from './pages/ResetPassword'
 import WaitingApprovalShelter from './pages/WaitingApprovalShelter'
+import EditShelterMenu from './pages/shelter/EditShelterMenu'
 
 function App() {
   // const navigate = useNavigate()
@@ -50,7 +51,6 @@ function App() {
       {/* <Route path='/' element={<Home />}></Route> */}
       <Route path="/" element={<HomeLayout />}>
         <Route path="" element={<Home />}/>
-        <Route path="edit-shelter" element={<EditShelter />}/>
         <Route path="search-animal" element={<SearchPage />}/>
         <Route path="detail-animal/:id" element={<DetailAnimal />}/>
         <Route path="cart" element={<Cart />}/>
@@ -70,9 +70,11 @@ function App() {
       </Route>
       <Route path="/shelter" element={<ShelterLayout />}>
         <Route path="home" element={<ShelterHome />} />
+        <Route path="setting" element={<EditShelterMenu />} />
         <Route path="transaction" element={<ShelterTransaction />} />
         <Route path="transaction/detail/:id" element={<ShelterTransactionDetail />} />
       </Route>
+      <Route path="edit-shelter" element={<EditShelter />}/>
       <Route path='/login' element={<Login />}></Route>
       <Route path='/register' element={<Register />}></Route>
       <Route path="/create-shelter" element={<CreateShelter />}/>
