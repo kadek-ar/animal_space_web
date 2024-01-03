@@ -1,12 +1,10 @@
-import { Alert, Button, Card, Form, Input, Modal, Spin, Typography } from "antd";
+import { Button, Card, Form, Input, Modal, Spin, Typography } from "antd";
 import { Container } from "react-bootstrap";
 import { api } from "../../utillities/api";
 import { CheckOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 
 export default function EditShelterMenu() {
-    const navigate = useNavigate()
     const [form] = Form.useForm() 
     const [loading, setLoading] = useState(false)
     const [, setData] = useState<any>()
