@@ -39,7 +39,7 @@ export default function SearchPage() {
             '&from_month=' + (searchParams.get('from_month') || '') +
             '&to_month=' + (searchParams.get('to_month') || '')
         ).then((res) => {
-            setData(res?.data?.data || [])
+            setData((res?.data?.data || []).filter((item: any) => item.Status != 'sold') || [])
         }).catch((err) => {
             Modal.error({
                 title: 'Error to Get data',
