@@ -72,6 +72,11 @@ export default function ShelterHome() {
             key: 'Type',
         },
         {
+            title: 'Animal Gender',
+            dataIndex: 'Gender',
+            key: 'Gender',
+        },
+        {
             title: 'Animal Age',
             dataIndex: 'Age',
             key: 'Age',
@@ -249,7 +254,16 @@ export default function ShelterHome() {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Select options={[
+                                {
+                                    value: 'Male',
+                                    Label: 'Male',
+                                },
+                                {
+                                    value: 'Female',
+                                    Label: 'Female',
+                                }
+                            ]} />
                         </Form.Item>
                         <Form.Item label="Animal Category" name={['CategoryID']} 
                             rules={[
